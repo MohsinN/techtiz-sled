@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1320" />
+<title>U.S. SLED Case Studies | Decoded + Delivered | Techtiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="_shared.css" />
+<style>
+/* ===== Case studies index — page-specific ===== */
+
+.page-hero {
+  background: var(--seasalt);
+  padding: 80px 0 56px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: ""; position: absolute; right: -40px; top: -40px;
+  width: 280px; height: 280px;
+  background: linear-gradient(45deg, transparent 49%, rgba(24,176,230,0.10) 49% 51%, transparent 51%);
+  background-size: 28px 28px;
+  transform: rotate(15deg);
+}
+.page-hero .lead { max-width: 760px; position: relative; z-index: 2; }
+.page-hero .lead .eyebrow { margin-bottom: 18px; display: inline-block; }
+.page-hero h1 {
+  font-size: 56px;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+.page-hero h1 .accent { color: var(--cyan); }
+.page-hero .body {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 620px;
+}
+
+/* Stat strip */
+.glance {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.glance-inner {
+  display: grid;
+  grid-template-columns: 200px repeat(4, 1fr);
+  padding: 32px 0;
+  align-items: center;
+}
+.glance-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.glance-stat {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 0 24px;
+  border-left: 1px solid var(--line);
+}
+.glance-stat .n {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--yale);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.glance-stat .l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.glance-stat.decoded .n { color: var(--cyan-strong); }
+.glance-stat.bidding .n { color: #9A6610; }
+.glance-stat.awarded .n { color: var(--yale); }
+.glance-stat.delivered .n { color: #1F7855; }
+
+/* Filter bar */
+.filter-bar {
+  position: sticky; top: 128px;
+  z-index: 30;
+  background: var(--seasalt);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+}
+.filter-inner {
+  display: flex; align-items: center; gap: 32px;
+  flex-wrap: wrap;
+}
+.filter-group {
+  display: flex; align-items: center; gap: 10px;
+}
+.filter-group .gl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 2px;
+}
+.filter-pills {
+  display: inline-flex;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 3px;
+}
+.fpill {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 7px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+  white-space: nowrap;
+}
+.fpill:hover { color: var(--yale); }
+.fpill.on { background: var(--yale); color: var(--white); }
+.fpill.on.decoded { background: var(--cyan-strong); }
+.fpill.on.bidding { background: var(--amber); color: var(--white); }
+.fpill.on.awarded { background: var(--yale); }
+.fpill.on.delivered { background: var(--green); }
+
+.filter-select {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 8px 28px 8px 12px;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 14px) center, calc(100% - 10px) center;
+  background-size: 4px 4px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.results-count {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Case study grid */
+.grid-section { padding: 56px 0 110px; }
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* CTA band */
+.cta-band {
+  background: var(--yale-dark);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.cta-band::before {
+  content: ""; position: absolute; right: -60px; top: -60px;
+  width: 320px; height: 320px;
+  background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%);
+  background-size: 30px 30px;
+  transform: rotate(15deg);
+}
+.cta-band-inner {
+  padding: 80px 0;
+  text-align: center;
+  position: relative; z-index: 2;
+}
+.cta-band .eyebrow { color: var(--cyan); margin-bottom: 16px; display: inline-block; }
+.cta-band h2 { color: var(--white); font-size: 40px; line-height: 1.1; margin-bottom: 18px; max-width: 700px; margin-left: auto; margin-right: auto; }
+.cta-band p { color: rgba(255,255,255,0.78); font-size: 16px; max-width: 560px; margin: 0 auto 28px; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap nav">
+    <a href="../Homepage.html" class="brand-mark" aria-label="Techtiz home"><img src="../assets/logo.svg" alt="Techtiz" class="brand-logo" /></a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="../Homepage.html" class="nav-link">About Us</a>
+      <div class="nav-item" data-mega="services">
+        <button class="nav-link" type="button" aria-expanded="false">Services <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">We Offer</div>
+              <div class="mega-list" data-list="services">
+                <a class="mega-item active" data-key="development" href="#">Development <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ai" href="#">AI &amp; Intelligence <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="automation" href="#">Automation &amp; AI Solutions <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="transformation" href="#">Digital Transformation <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ux" href="#">UX Design / Enablement <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="services">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div>
+                <div>
+                  <h4 data-feat-title>Development</h4>
+                  <p data-feat-desc>Build robust, scalable digital products designed to grow with your business.</p>
+                </div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="services">
+                <a href="#">Custom Software</a>
+                <a href="#">Mobile Apps</a>
+                <a href="#">Low code / No-code Dev</a>
+                <a href="#">Vibe code Dev</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">U.S. Prime contractor?</span>
+                <a class="mega-cta" href="index.html">See U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item" data-mega="industries">
+        <button class="nav-link" type="button" aria-expanded="false">Industries <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">Industries</div>
+              <div class="mega-list" data-list="industries">
+                <a class="mega-item active" data-key="healthcare" href="#">Healthcare <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="marketing" href="#">Digital Marketing <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="realestate" href="#">Real Estate <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ecommerce" href="#">E-commerce <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="logistics" href="#">Logistics &amp; Supply Chain <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="education" href="#">Education <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="industries">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                <div>
+                  <h4 data-feat-title>Healthcare</h4>
+                  <p data-feat-desc>Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p>
+                </div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="industries">
+                <a href="#">AI Appointment Management</a>
+                <a href="#">AI-Powered Communication</a>
+                <a href="#">Reporting Optimization</a>
+                <a href="#">Patient Records</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">State, county, local agencies?</span>
+                <a class="mega-cta" href="index.html">U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="case-studies.html" class="nav-link">Case Studies</a>
+      <a href="#" class="nav-link">Careers</a>
+    </nav>
+
+    <div class="right-cta">
+      <a href="index.html" class="us-pill" aria-current="page">
+        <span class="sled-dot"></span> U.S. Public Sector
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- SUB-NAV -->
+<div class="subnav">
+  <div class="wrap subnav-inner">
+    <div class="crumbs">
+      <a href="../Homepage.html">Techtiz</a>
+      <span class="sep">/</span>
+      <a href="index.html">U.S. Public Sector</a>
+      <span class="sep">/</span>
+      <span class="here">Case Studies</span>
+    </div>
+    <div class="sub-links">
+      <a href="index.html">Hub</a>
+      <a href="index.html#two-stages">For Primes</a>
+      <a href="index.html#onshore">Delivery</a>
+      <a href="index.html#vehicles">Vehicles</a>
+      <a href="capabilities.html">Capabilities</a>
+      <a href="case-studies.html" class="on">Case Studies</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow"><span class="gl"></span> U.S. SLED Case Studies</span>
+      <h1>Every RFP we've decoded.<br/><span class="accent">Every engagement we've delivered.</span></h1>
+      <p class="body">Decodes prove analytical depth. Deliveries prove execution. Both live here, both filterable by RFP family, state, and year.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STAT GLANCE -->
+<div class="glance">
+  <div class="wrap glance-inner" style="grid-template-columns: 200px 1fr 1fr;">
+    <div class="glance-label">At a glance</div>
+    <div class="glance-stat decoded">
+      <span class="n">19</span>
+      <span class="l">Decoded</span>
+    </div>
+    <div class="glance-stat delivered">
+      <span class="n">2</span>
+      <span class="l">Delivered</span>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="wrap filter-inner">
+    <div class="filter-group">
+      <span class="gl">Status</span>
+      <div class="filter-pills">
+        <span class="fpill on">All</span>
+        <span class="fpill">Decoded</span>
+        <span class="fpill">Delivered</span>
+      </div>
+    </div>
+    <div class="filter-group">
+      <span class="gl">Family</span>
+      <select class="filter-select">
+        <option>All families</option>
+        <option>Materials Management Plans</option>
+        <option>WCAG Accessibility Builds</option>
+        <option>State Permitting Systems</option>
+        <option>Public Engagement Platforms</option>
+        <option>Grant Reporting Modernization</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="gl">State</span>
+      <select class="filter-select">
+        <option>All states</option>
+        <option>Michigan</option>
+        <option>Oregon</option>
+        <option>Colorado</option>
+        <option>New Mexico</option>
+        <option>Texas</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="gl">Year</span>
+      <select class="filter-select">
+        <option>All years</option>
+        <option>2026</option>
+        <option>2025</option>
+        <option>2024</option>
+      </select>
+    </div>
+    <div class="results-count">21 results · sorted most recent</div>
+  </div>
+</div>
+
+<!-- CASE STUDY GRID -->
+<section class="grid-section">
+  <div class="wrap">
+    <div class="cs-grid">
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"/></svg></div>
+        <div class="rfp-num">RFP 2026-08</div>
+        <div class="rfp-title">Professional Consulting Services for Bay County Materials Management Plan</div>
+        <div class="rfp-meta"><span>Michigan</span><span>MMP</span><span>$390K to $620K</span></div>
+        <div class="rfp-hook">"Why fee-priced bids systematically lose this RFP."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21 h18"/><path d="M6 21 V8 l6 -4 l6 4 v13"/></svg></div>
+        <div class="rfp-num">RFP 2025-31</div>
+        <div class="rfp-title">Statewide Digital Service Modernization &amp; WCAG 2.2 AA Conformance</div>
+        <div class="rfp-meta"><span>Oregon</span><span>WCAG</span><span>$1.2M to $1.8M</span></div>
+        <div class="rfp-hook">"Six accessibility traps that disqualify late-stage bids."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12 h18 M12 3 a14 14 0 0 1 0 18"/></svg></div>
+        <div class="rfp-num">RFP 2026-12</div>
+        <div class="rfp-title">Statewide Permitting Platform Modernization · Phase 2</div>
+        <div class="rfp-meta"><span>Colorado</span><span>Permitting</span><span>$2.4M to $3.1M</span></div>
+        <div class="rfp-hook">"How a 12-week pilot beats a 9-month RFP build-out."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status delivered">Delivered</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 12 l2 2 l4 -4"/></svg></div>
+        <div class="rfp-num">RFP 2024-14</div>
+        <div class="rfp-title">Public Engagement Platform · 35-Municipality Regional Plan</div>
+        <div class="rfp-meta"><span>Michigan</span><span>Engagement</span><span>Delivered '25</span></div>
+        <div class="rfp-hook">"Adopted on time, zero deficiencies, 35 of 35 municipalities."</div>
+        <span class="rfp-link">Read the case study</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div class="rfp-num">RFP 2026-04</div>
+        <div class="rfp-title">Federal Grant Reporting Modernization for Tribal &amp; Rural Education</div>
+        <div class="rfp-meta"><span>New Mexico</span><span>Grants</span><span>$680K to $920K</span></div>
+        <div class="rfp-hook">"Reporting cadence is the SOW. The platform is incidental."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9 l9 -6 l9 6 v12 H3 z"/><path d="M9 21 V12 h6 v9"/></svg></div>
+        <div class="rfp-num">RFP 2025-17</div>
+        <div class="rfp-title">County Materials Management Plan Adoption &amp; EGLE Submission</div>
+        <div class="rfp-meta"><span>Michigan</span><span>MMP</span><span>$540K to $710K</span></div>
+        <div class="rfp-hook">"Why pricing weight beats narrative weight on this RFP family."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"/></svg></div>
+        <div class="rfp-num">RFP 2025-09</div>
+        <div class="rfp-title">County Solid Waste Plan Update &amp; Stakeholder Engagement</div>
+        <div class="rfp-meta"><span>Michigan</span><span>MMP</span><span>$310K to $480K</span></div>
+        <div class="rfp-hook">"Stakeholder reach was the scoring lever. Two bidders missed it."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12 h20 M12 2 a15 15 0 0 1 0 20"/></svg></div>
+        <div class="rfp-num">RFP 2025-22</div>
+        <div class="rfp-title">Statewide Education Portal Accessibility Remediation</div>
+        <div class="rfp-meta"><span>Texas</span><span>WCAG</span><span>$890K to $1.4M</span></div>
+        <div class="rfp-hook">"Audit-first bids underprice the remediation by 40%."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status delivered">Delivered</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V8 z"/><path d="M14 2 v6 h6"/></svg></div>
+        <div class="rfp-num">RFP 2023-41</div>
+        <div class="rfp-title">EGLE-Submitted Materials Management Plan · County Adoption</div>
+        <div class="rfp-meta"><span>Michigan</span><span>MMP</span><span>Delivered '24</span></div>
+        <div class="rfp-hook">"Submitted Tuesday, adopted Thursday, zero deficiencies."</div>
+        <span class="rfp-link">Read the case study</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="wrap cta-band-inner">
+    <span class="eyebrow">Don't see your RFP?</span>
+    <h2>We turn around an RFP decode in 5 business days.</h2>
+    <p>Send us the SOW. We'll come back with the evaluation math, the statutory traps, and a timeline that survives contact with the adoption calendar.</p>
+    <a href="contact.html" class="cta">Send us yours <span class="arr"></span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand-foot">
+        <a href="../Homepage.html" class="brand-mark"><img src="../assets/logo-light.svg" alt="Techtiz" class="brand-logo" /></a>
+        <p>An AI-native engineering studio building adaptive systems for ambitious teams.</p>
+      </div>
+      <div>
+        <h5>U.S. Public Sector</h5>
+        <ul>
+          <li><a href="index.html">SLED Hub</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="index.html#two-stages">For Primes</a></li>
+          <li><a href="index.html#vehicles">Vehicles</a></li>
+          <li><a href="contact.html">SLED Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>International</h5>
+        <ul>
+          <li><a href="../Homepage.html">Home</a></li>
+          <li><a href="#">Solutions</a></li>
+          <li><a href="#">Industries</a></li>
+          <li><a href="#">Case Studies</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Insights</h5>
+        <ul><li><a href="#">Articles</a></li><li><a href="#">Playbooks</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="strip">
+      <div>© 2026 Techtiz · Lahore HQ · U.S. office</div>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="_nav.js"></script>
+<script>
+  // Wire status filter pills (cosmetic; real filtering would re-render the grid)
+  document.querySelectorAll('.filter-pills').forEach(group => {
+    group.querySelectorAll('.fpill').forEach(p => {
+      p.addEventListener('click', () => {
+        group.querySelectorAll('.fpill').forEach(x => {
+          x.classList.remove('on', 'decoded', 'delivered');
+        });
+        p.classList.add('on');
+        const label = p.textContent.trim().toLowerCase();
+        if (['decoded', 'delivered'].includes(label)) {
+          p.classList.add(label);
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

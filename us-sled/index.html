@@ -1,0 +1,1972 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1320" />
+<title>U.S. Public Sector | Back-office engineering for primes | Techtiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="_shared.css" />
+<style>
+/* ============================================================
+   SLED Hub page-specific styles
+   ============================================================ */
+
+/* ----- HERO with Capitol photo — sleek corporate ----- */
+.sled-hero {
+  position: relative;
+  background: var(--yale-dark);
+  color: var(--white);
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 640px;
+}
+.sled-hero .capitol-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.sled-hero .capitol {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/capitol.png');
+  background-size: cover;
+  background-position: right 35%;
+  filter: saturate(0.5) contrast(1.05) brightness(0.9);
+  opacity: 0.48;
+  animation: capitolDrift 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes capitolDrift {
+  0%   { transform: scale(1.02) translate3d(0, 0, 0); }
+  100% { transform: scale(1.05) translate3d(-6px, -4px, 0); }
+}
+.sled-hero .overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(14,38,64,0.98) 0%, rgba(14,38,64,0.88) 38%, rgba(14,38,64,0.55) 72%, rgba(14,38,64,0.30) 100%),
+    linear-gradient(180deg, rgba(14,38,64,0.20) 0%, rgba(14,38,64,0.55) 100%);
+}
+/* Hidden — kept in DOM so we don't have to restructure */
+.sled-hero .grain,
+.sled-hero .sparkles,
+.sled-hero .tsq-cluster { display: none; }
+
+.sled-hero .inner {
+  position: relative; z-index: 5;
+  padding: 120px 0 110px;
+}
+.sled-hero .lead { max-width: 760px; }
+.sled-hero .lead .eyebrow { color: var(--cyan); margin-bottom: 22px; display: inline-block; }
+.sled-hero h1 {
+  color: var(--white);
+  font-size: 60px;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin-bottom: 24px;
+}
+.sled-hero h1 .accent { color: var(--cyan); }
+.sled-hero .body {
+  color: rgba(255,255,255,0.80);
+  font-size: 18px; line-height: 1.55;
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+.sled-hero .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.sled-hero .quick-stats {
+  display: flex; gap: 36px;
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  max-width: 760px;
+}
+.sled-hero .quick-stats .qs {
+  display: flex; flex-direction: column;
+}
+.sled-hero .quick-stats .qs .n {
+  font-size: 26px; font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.sled-hero .quick-stats .qs .l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+  margin-top: 8px;
+}
+.sled-hero .quick-stats .qs + .qs {
+  padding-left: 36px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+}
+
+.sled-hero .disclaimer {
+  margin-top: 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  color: rgba(24,176,230,0.85);
+  text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid rgba(24,176,230,0.4);
+  border-radius: 4px;
+}
+.sled-hero .disclaimer .tsq {
+  width: 8px; height: 8px;
+  background: var(--cyan); transform: rotate(15deg);
+}
+
+/* ----- Two stages. One partner. ----- */
+.two-stages { background: var(--seasalt); }
+.two-stages .ts-header {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  margin-bottom: 48px;
+  align-items: end;
+}
+.two-stages .ts-header h2 {
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+}
+.two-stages .ts-header .sub {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.toggle-pill {
+  display: inline-flex;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 6px;
+  gap: 4px;
+  margin-bottom: 40px;
+}
+.toggle-pill button {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 22px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  transition: background 200ms ease, color 200ms ease;
+  font-family: inherit;
+}
+.toggle-pill button:hover { color: var(--yale); }
+.toggle-pill button.on {
+  background: var(--yale-dark);
+  color: var(--white);
+}
+.toggle-pill button .ic {
+  width: 16px; height: 16px;
+}
+
+.stage-panel { display: none; }
+.stage-panel.show { display: grid; }
+.stage-panel {
+  grid-template-columns: 1fr 1.55fr;
+  gap: 48px;
+  align-items: start;
+}
+.stage-side .stage-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--cyan-strong);
+  text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 18px;
+}
+.stage-side h3 {
+  font-size: 30px;
+  color: var(--yale-dark);
+  line-height: 1.15;
+  margin-bottom: 28px;
+}
+.stage-side .pain-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 22px 20px;
+  position: relative;
+}
+.stage-side .pain-card .pain-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.stage-side .pain-card .pain-label::before {
+  content: "";
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(216,144,23,0.12);
+  background-image: radial-gradient(circle, var(--amber) 22%, transparent 22%);
+  background-size: 100% 100%;
+}
+.stage-side .pain-card p {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.55;
+  font-style: italic;
+}
+.stage-side .role-line {
+  margin-top: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.stage-side .role-line strong {
+  color: var(--yale-dark); font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.svc-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 22px 20px;
+  display: flex; gap: 14px;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  position: relative;
+}
+.svc-card:hover {
+  transform: translateY(-2px);
+  border-color: #C2CCD9;
+  box-shadow: 0 16px 30px -18px rgba(21,58,95,0.18);
+}
+.svc-card .ic {
+  width: 32px; height: 32px;
+  color: var(--cyan-strong);
+  flex-shrink: 0;
+}
+.svc-card .ic svg { width: 28px; height: 28px; }
+.svc-card .body {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.svc-card h4 {
+  font-size: 15.5px;
+  color: var(--yale-dark);
+  line-height: 1.25;
+}
+.svc-card p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.svc-card .nu {
+  position: absolute;
+  top: 18px; right: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+/* ----- Onshore PM-led / Offshore-engineered ----- */
+.onshore {
+  background: var(--white);
+}
+.onshore .onshore-head {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  margin-bottom: 40px;
+  align-items: end;
+}
+.onshore h2 { font-size: 40px; line-height: 1.05; letter-spacing: -0.022em; }
+.onshore .onshore-head p {
+  font-size: 15.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.clock-card {
+  background: var(--seasalt);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 36px 36px 30px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 36px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.clock-card .clock-left .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--cyan-strong);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.clock-card .clock-left h3 {
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--yale-dark);
+}
+.clock-card .clock-right { display: flex; flex-direction: column; gap: 10px; }
+
+.clock-grid {
+  position: relative;
+  height: 70px;
+}
+.clock-ruler {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  padding-bottom: 6px;
+}
+.clock-ruler span {
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+.clock-bars {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  height: 70px;
+  padding: 6px;
+  display: flex; flex-direction: column;
+  gap: 6px;
+}
+.clock-bar {
+  height: 24px;
+  border-radius: 4px;
+  position: relative;
+  display: flex; align-items: center;
+  padding: 0 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  font-weight: 600;
+}
+.clock-bar.pk {
+  background: var(--cyan);
+  color: var(--yale-dark);
+  /* 11A-8P PKT ≈ 1A-10A ET, ie 1-10 of 24h. Spans hours 1-10 → 1/24 to 10/24 */
+  position: absolute;
+  left: 6%;
+  width: 36%;
+  top: 10px;
+}
+.clock-bar.us {
+  background: var(--yale-dark);
+  position: absolute;
+  left: 38%;
+  width: 38%;
+  top: 36px;
+}
+.clock-footer {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+.clock-footer span.mid { color: var(--cyan-strong); font-weight: 600; }
+
+.concerns-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+.concern-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px 24px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.concern-card:hover {
+  transform: translateY(-2px);
+  border-color: #C2CCD9;
+  box-shadow: 0 16px 30px -18px rgba(21,58,95,0.16);
+}
+.concern-card .ic {
+  width: 44px; height: 44px;
+  background: var(--yale-dark);
+  color: var(--cyan);
+  border-radius: 10px;
+  display: grid; place-items: center;
+}
+.concern-card .ic svg { width: 22px; height: 22px; }
+.concern-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.concern-card h4 {
+  font-size: 17px;
+  color: var(--yale-dark);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.concern-card .pain {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-style: italic;
+  padding-left: 12px;
+  border-left: 2px solid var(--line);
+  margin-bottom: 10px;
+}
+.concern-card .pain strong { font-style: normal; color: var(--yale-dark); font-weight: 700; }
+.concern-card .fix {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+  padding-left: 12px;
+  border-left: 2px solid var(--cyan);
+}
+.concern-card .fix strong { color: var(--yale-dark); font-weight: 700; }
+
+/* ----- How we work behind a prime (dark band) ----- */
+.principles {
+  background: var(--yale-dark);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.principles::before {
+  content: ""; position: absolute; right: -40px; top: 60px;
+  width: 480px; height: 480px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 40px, rgba(24,176,230,0.04) 40px 41px),
+    repeating-linear-gradient(90deg, transparent 0 40px, rgba(24,176,230,0.04) 40px 41px);
+  pointer-events: none;
+}
+.principles::after {
+  content: ""; position: absolute; left: 40%; bottom: -60px;
+  width: 380px; height: 380px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 40px, rgba(24,176,230,0.03) 40px 41px),
+    repeating-linear-gradient(90deg, transparent 0 40px, rgba(24,176,230,0.03) 40px 41px);
+  pointer-events: none;
+}
+.principles-inner {
+  display: grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  gap: 56px;
+  position: relative;
+  z-index: 2;
+}
+.principles .left .eyebrow { color: var(--cyan); display: inline-block; margin-bottom: 18px; }
+.principles .left h2 {
+  color: var(--white);
+  font-size: 40px;
+  line-height: 1.08;
+  margin-bottom: 18px;
+}
+.principles .left p {
+  color: rgba(255,255,255,0.72);
+  font-size: 15.5px;
+  line-height: 1.6;
+  max-width: 360px;
+  margin-bottom: 24px;
+}
+.principles .locked {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  padding: 9px 16px;
+  border: 1px solid rgba(24,176,230,0.45);
+  border-radius: 100px;
+  background: rgba(24,176,230,0.06);
+}
+.principles .locked svg { width: 14px; height: 14px; }
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+}
+.principle {
+  padding: 36px 36px 34px;
+  position: relative;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.principle:nth-child(2n) { border-right: 0; }
+.principle:nth-child(n+3) { border-bottom: 0; }
+.principle .ic {
+  width: 42px; height: 42px;
+  background: rgba(24,176,230,0.12);
+  border-radius: 10px;
+  display: grid; place-items: center;
+  color: var(--cyan);
+  margin-bottom: 22px;
+}
+.principle .ic svg { width: 20px; height: 20px; }
+.principle .num {
+  position: absolute;
+  top: 28px; right: 30px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.45);
+}
+.principle h3 {
+  color: var(--white);
+  font-size: 19px;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.principle p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.70);
+}
+
+/* ----- Outcomes (existing — slim spacing) ----- */
+.outcomes {
+  background: var(--yale);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.outcomes::before {
+  content: ""; position: absolute; right: -40px; top: -40px;
+  width: 260px; height: 260px;
+  background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%);
+  background-size: 26px 26px;
+  transform: rotate(15deg);
+}
+.outcomes-inner {
+  padding: 80px 0;
+  position: relative;
+  z-index: 2;
+}
+.outcomes .head { text-align: center; margin-bottom: 48px; }
+.outcomes .head .eyebrow { color: var(--cyan); margin-bottom: 14px; display: inline-block; }
+.outcomes .head h2 { color: var(--white); font-size: 36px; max-width: 720px; margin: 0 auto; line-height: 1.1; }
+.outcomes .stats {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+}
+.outcomes .stat {
+  text-align: center;
+  padding: 0 20px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+}
+.outcomes .stat:first-child { border-left: 0; }
+.outcomes .stat .n {
+  font-size: 48px; font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.outcomes .stat .n .small { font-size: 24px; }
+.outcomes .stat .l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.78);
+  text-transform: uppercase;
+  line-height: 1.4;
+  max-width: 160px;
+  margin: 0 auto;
+}
+
+/* ----- Backbone ----- */
+.backbone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.backbone-card .icon-badge { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.backbone-card .badge-no {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--cyan-strong);
+  text-transform: uppercase;
+}
+
+/* ----- Recent RFPs ----- */
+.rfp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.see-all-link { margin-top: 32px; text-align: center; }
+.see-all-link a {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--yale);
+  border-bottom: 2px solid var(--cyan);
+  padding: 4px 0 6px;
+  transition: gap 200ms ease;
+}
+.see-all-link a:hover { gap: 16px; }
+
+/* ----- Easy to put on contract (procurement vehicles) ----- */
+.vehicles {
+  background: var(--seasalt);
+}
+.vehicles .vh-head {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  margin-bottom: 40px;
+  align-items: end;
+}
+.vehicles h2 { font-size: 40px; line-height: 1.05; }
+.vehicles .vh-head .sub-area {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+}
+.vehicles .vh-head .sub-text {
+  font-size: 15.5px; color: var(--muted); line-height: 1.6;
+  max-width: 460px;
+  text-align: right;
+}
+.vehicles .vh-head .email-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  color: var(--muted);
+  text-transform: uppercase;
+  text-align: right;
+}
+.vehicles .vh-head .email-line a {
+  color: var(--yale);
+  border-bottom: 1px solid var(--cyan);
+  padding-bottom: 1px;
+}
+.vehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.vehicle {
+  padding: 30px 30px 26px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: start;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.vehicle:nth-child(3n) { border-right: 0; }
+.vehicle:nth-child(n+4) { border-bottom: 0; }
+.vehicle .ic {
+  width: 44px; height: 44px;
+  background: var(--cyan-soft);
+  border-radius: 10px;
+  display: grid; place-items: center;
+  color: var(--cyan-strong);
+}
+.vehicle .ic svg { width: 22px; height: 22px; }
+.vehicle h4 {
+  font-size: 17px; color: var(--yale-dark);
+  margin-bottom: 4px;
+}
+.vehicle .v-sub {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  line-height: 1.45;
+}
+.vehicle .v-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--cyan-strong);
+  letter-spacing: 0.04em;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.vehicle .v-note::before {
+  content: ""; width: 6px; height: 6px;
+  background: var(--cyan); transform: rotate(15deg);
+}
+
+/* ----- Why Techtiz ----- */
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.why-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--cyan-strong);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.why-card h3 { font-size: 22px; color: var(--yale); line-height: 1.25; margin-bottom: 14px; }
+.why-card p { font-size: 14.5px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.why-card .counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--seasalt);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+.why-card .counter em { font-style: normal; color: var(--cyan-strong); }
+
+/* ----- Win it. Deliver it. Quietly. (inquiry form) ----- */
+.inquiry {
+  background: var(--seasalt);
+  padding: 100px 0;
+}
+.inquiry-shell {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  box-shadow: 0 30px 60px -30px rgba(14,38,64,0.18);
+}
+.inquiry-left {
+  background: var(--yale-dark);
+  color: var(--white);
+  padding: 56px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.inquiry-left::before {
+  content: ""; position: absolute; right: -40px; bottom: -40px;
+  width: 240px; height: 240px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 26px, rgba(24,176,230,0.06) 26px 27px),
+    repeating-linear-gradient(90deg, transparent 0 26px, rgba(24,176,230,0.06) 26px 27px);
+}
+.inquiry-left > * { position: relative; z-index: 2; }
+.inquiry-left .eyebrow { color: var(--cyan); display: inline-block; margin-bottom: 20px; }
+.inquiry-left h2 {
+  color: var(--white);
+  font-size: 38px;
+  line-height: 1.08;
+  margin-bottom: 22px;
+}
+.inquiry-left p {
+  color: rgba(255,255,255,0.78);
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+.inquiry-left ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.inquiry-left ul li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.92);
+}
+.inquiry-left ul li svg {
+  width: 18px; height: 18px;
+  color: var(--cyan); flex-shrink: 0;
+}
+
+.inquiry-right { padding: 48px 48px 40px; display: flex; flex-direction: column; gap: 22px; }
+.inquiry-right .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.inquiry-right .form-row.single { grid-template-columns: 1fr; }
+.field-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: block;
+}
+.field-label .req { color: var(--cyan-strong); }
+.inquiry-right input[type="text"],
+.inquiry-right input[type="email"],
+.inquiry-right input[type="tel"],
+.inquiry-right select,
+.inquiry-right textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14.5px;
+  color: var(--ink);
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+  outline: none;
+}
+.inquiry-right input::placeholder, .inquiry-right textarea::placeholder { color: #9AA4B2; }
+.inquiry-right select { font-family: inherit; cursor: pointer; }
+.inquiry-right textarea { min-height: 112px; resize: vertical; line-height: 1.5; }
+.inquiry-right input:focus, .inquiry-right select:focus, .inquiry-right textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(24,176,230,0.18);
+}
+
+.need-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.need-card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 36px 1fr 18px;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.need-card:hover { border-color: var(--yale); }
+.need-card.on {
+  border-color: var(--cyan);
+  background: var(--cyan-soft);
+}
+.need-card .ic {
+  width: 36px; height: 36px;
+  background: var(--seasalt);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: var(--yale-dark);
+}
+.need-card .ic svg { width: 18px; height: 18px; }
+.need-card.on .ic { background: var(--white); }
+.need-card .body h5 { font-size: 14.5px; color: var(--yale-dark); margin: 0 0 2px; font-weight: 700; }
+.need-card .body p {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.10em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.need-card .check {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  position: relative;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.need-card.on .check {
+  background: var(--cyan);
+  border-color: var(--cyan);
+}
+.need-card.on .check::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 5px; height: 9px;
+  border-right: 2px solid var(--yale-dark);
+  border-bottom: 2px solid var(--yale-dark);
+  transform: rotate(45deg);
+}
+
+.inquiry-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 8px;
+  gap: 18px;
+}
+.inquiry-foot .nda {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+  line-height: 1.5;
+  max-width: 360px;
+}
+.send-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--yale-dark);
+  color: var(--white);
+  font-weight: 700; font-size: 14.5px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.send-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -10px rgba(14,38,64,0.4); }
+.send-btn svg { width: 18px; height: 18px; }
+
+</style>
+</head>
+<body>
+
+<template id="__bundler_thumbnail" data-bg-color="#0E2640">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(220 220) rotate(15 240 240)">
+      <rect x="0" y="0" width="480" height="480" fill="#18B0E6"></rect>
+      <rect x="55" y="55" width="100" height="100" fill="#FFFFFF"></rect>
+    </g>
+    <g fill="rgba(255,255,255,0.18)" transform="translate(700 280)">
+      <rect x="0" y="220" width="380" height="120"></rect>
+      <ellipse cx="190" cy="220" rx="120" ry="80"></ellipse>
+      <rect x="160" y="60" width="60" height="160"></rect>
+      <circle cx="190" cy="60" r="18"></circle>
+    </g>
+  </svg>
+</template>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap nav">
+    <a href="../Homepage.html" class="brand-mark" aria-label="Techtiz home"><img src="../assets/logo.svg" alt="Techtiz" class="brand-logo" /></a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#" class="nav-link">About Us</a>
+
+      <div class="nav-item" data-mega="services">
+        <button class="nav-link" type="button" aria-expanded="false">Services <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">We Offer</div>
+              <div class="mega-list" data-list="services">
+                <a class="mega-item active" data-key="development" href="#">Development <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ai" href="#">AI &amp; Intelligence <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="automation" href="#">Automation &amp; AI Solutions <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="transformation" href="#">Digital Transformation <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ux" href="#">UX Design / Enablement <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="services">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div>
+                <div>
+                  <h4 data-feat-title>Development</h4>
+                  <p data-feat-desc>Build robust, scalable digital products designed to grow with your business.</p>
+                </div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="services">
+                <a href="#">Custom Software</a>
+                <a href="#">Mobile Apps</a>
+                <a href="#">Low code / No-code Dev</a>
+                <a href="#">Vibe code Dev</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">U.S. Prime contractor?</span>
+                <a class="mega-cta" href="index.html">See U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item" data-mega="industries">
+        <button class="nav-link" type="button" aria-expanded="false">Industries <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">Industries</div>
+              <div class="mega-list" data-list="industries">
+                <a class="mega-item active" data-key="healthcare" href="#">Healthcare <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="marketing" href="#">Digital Marketing <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="realestate" href="#">Real Estate <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ecommerce" href="#">E-commerce <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="logistics" href="#">Logistics &amp; Supply Chain <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="education" href="#">Education <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="industries">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                <div>
+                  <h4 data-feat-title>Healthcare</h4>
+                  <p data-feat-desc>Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p>
+                </div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="industries">
+                <a href="#">AI Appointment Management</a>
+                <a href="#">AI-Powered Communication</a>
+                <a href="#">Reporting Optimization</a>
+                <a href="#">Patient Records</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">State, county, local agencies?</span>
+                <a class="mega-cta" href="index.html">U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="case-studies.html" class="nav-link">Case Studies</a>
+      <a href="#" class="nav-link">Careers</a>
+    </nav>
+
+    <div class="right-cta">
+      <a href="index.html" class="us-pill" aria-current="page">
+        <span class="sled-dot"></span> U.S. Public Sector
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- SUB-NAV (SLED contextual) -->
+<div class="subnav">
+  <div class="wrap subnav-inner">
+    <div class="crumbs">
+      <a href="../Homepage.html">Techtiz</a>
+      <span class="sep">/</span>
+      <span class="here">U.S. Public Sector</span>
+    </div>
+    <div class="sub-links" data-spy>
+      <a href="#top" data-spy-id="top" class="on">Hub</a>
+      <a href="#two-stages" data-spy-id="two-stages">For Primes</a>
+      <a href="#onshore" data-spy-id="onshore">Delivery</a>
+      <a href="#vehicles" data-spy-id="vehicles">Vehicles</a>
+      <a href="capabilities.html">Capabilities</a>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="sled-hero" id="top" data-screen-label="01 Hero">
+  <div class="capitol-wrap" aria-hidden="true">
+    <div class="capitol"></div>
+  </div>
+  <div class="overlay" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="sparkles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="tsq-cluster" aria-hidden="true">
+    <span class="a"></span><span class="b"></span><span class="c"></span>
+    <span class="d"></span><span class="e"></span><span class="f"></span>
+    <span class="g"></span><span class="h"></span>
+  </div>
+
+  <div class="wrap inner">
+    <div class="lead">
+      <span class="eyebrow"><span class="gl"></span> U.S. SLED · Back-office engineering for primes</span>
+      <h1>Decode the RFP. <span class="accent">Build the backbone.</span><br/>Quietly behind your brand.</h1>
+      <p class="body">Back-office engineering for U.S. primes. RFP decode and technical delivery, white-labeled. We never face the agency.</p>
+
+      <div class="cta-row">
+        <a href="#inquiry" class="cta">Send us an RFP to decode <span class="arr"></span></a>
+        <a href="case-studies.html" class="btn-ghost-dark">See the decodes →</a>
+      </div>
+
+      <div class="quick-stats">
+        <div class="qs">
+          <div class="n">~10h</div>
+          <div class="l">US/PK overlap, daily</div>
+        </div>
+        <div class="qs">
+          <div class="n">1 day</div>
+          <div class="l">Response SLA, NDA-bound</div>
+        </div>
+        <div class="qs">
+          <div class="n">21</div>
+          <div class="l">RFPs decoded · 5 families</div>
+        </div>
+        <div class="qs">
+          <div class="n">0</div>
+          <div class="l">Agency-facing engagements</div>
+        </div>
+      </div>
+
+      <div class="disclaimer" style="margin-top: 28px;">
+        <span class="tsq"></span>
+        Back-office only · We never face the agency · We do not compete with our partners
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP (SAM.gov + SOC 2 removed; rebalanced to 4 cols) -->
+<div class="trust-strip">
+  <div class="wrap">
+    <div class="trust-row" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 4 V2 M17 4 V2 M3 10 h18"></path></svg></div>
+        <div class="ti-body">
+          <span class="ti-l">Federal classification</span>
+          <span class="ti-v">NAICS 541511 · 541512</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21 h18"></path><path d="M6 21 V8 l6 -4 l6 4 v13"></path></svg></div>
+        <div class="ti-body">
+          <span class="ti-l">State procurement</span>
+          <span class="ti-v">NIGP 918-46 · 918-00</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 12 l2 2 l4 -4"></path></svg></div>
+        <div class="ti-body">
+          <span class="ti-l">Insurance</span>
+          <span class="ti-v">Prime-routed</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7 v5 l3 2"></path></svg></div>
+        <div class="ti-body">
+          <span class="ti-l">Decode SLA</span>
+          <span class="ti-v">5 business days</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TWO STAGES · ONE PARTNER -->
+<section class="block two-stages" id="two-stages" data-screen-label="02 Two stages">
+  <div class="wrap">
+    <span class="eyebrow" style="margin-bottom: 14px; display: inline-flex; align-items: center;"><span class="gl"></span> TWO PHASES. ONE PARTNER.</span>
+    <div class="ts-header">
+      <h2>Engage us pre-award, post-award, or both, the prime always stays the face to the agency.</h2>
+      <p class="sub">Primes plug us in pre-award to decode the RFP, post-award to deliver, or both. We work behind your brand, on your tools, under your PM.</p>
+    </div>
+
+    <div class="toggle-pill" role="tablist">
+      <button class="on" data-stage="pre" role="tab" aria-selected="true">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L8 6 H4 v4 L0 14 l4 4 v4 h4 l4 4 4 -4 h4 v-4 l4 -4 -4 -4 V6 h-4 z" transform="scale(0.6) translate(8 8)"></path><path d="M9 9 l6 6 M15 9 l-6 6"></path></svg>
+        Pre-Award Support
+      </button>
+      <button data-stage="post" role="tab" aria-selected="false">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg>
+        Post-Award Delivery
+      </button>
+    </div>
+
+    <!-- PRE-BID PANEL -->
+    <div class="stage-panel show" data-panel="pre">
+      <div class="stage-side">
+        <div class="stage-tag">Phase 01 · Pre-Award</div>
+        <h3>Decode the RFP and load the technical volume.</h3>
+
+        <div class="pain-card">
+          <div class="pain-label">The Pain Point</div>
+          <p>"17 days to submission. Your architect is on another pursuit. Technical volume, compliance matrix, and orals demo all need owners."</p>
+        </div>
+        <div class="role-line">↳ Our role: <strong>Back-office decode &amp; technical-volume support</strong></div>
+      </div>
+
+      <div class="svc-grid">
+        <div class="svc-card">
+          <span class="nu">01</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></div>
+          <div class="body">
+            <h4>Technical volume writing</h4>
+            <p>Solution architecture, approach, and methodology sections drafted to your outline and style guide.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">02</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+          <div class="body">
+            <h4>Compliance matrix prep</h4>
+            <p>Line-by-line traceability against the SOW, every requirement mapped to a proposal section, owner, and evidence.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">03</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg></div>
+          <div class="body">
+            <h4>LOE &amp; pricing input</h4>
+            <p>Bottom-up labor estimates with optimistic/likely/pessimistic ranges. Direct-to-pricing model handoff.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">04</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div>
+          <div class="body">
+            <h4>Demo &amp; POC builds for orals</h4>
+            <p>Working prototypes the evaluation panel can click, not slideware. Built in 2-3 weeks, ready for orals.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">05</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+          <div class="body">
+            <h4>Past-performance packaging</h4>
+            <p>Citation writeups, CPARS-equivalent narratives, and reference letters, in your prime-branded templates.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">06</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="8" r="4"></circle><path d="M19 8l2 2 3-3"></path></svg></div>
+          <div class="body">
+            <h4>Key personnel resume tailoring</h4>
+            <p>Resume edits, role mapping, and LCAT alignment for proposed staff (yours or ours, named on your roster).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST-BID PANEL -->
+    <div class="stage-panel" data-panel="post">
+      <div class="stage-side">
+        <div class="stage-tag">Phase 02 · Post-Award</div>
+        <h3>Deliver the technical workstream, under your name.</h3>
+
+        <div class="pain-card">
+          <div class="pain-label">The Pain Point</div>
+          <p>"Kickoff Monday. You need senior engineers in seats, a sprint cadence the agency PM trusts, and zero compliance findings. Bench is thin, ramp-up is tight."</p>
+        </div>
+        <div class="role-line">↳ Our role: <strong>Back-office delivery · white-label</strong></div>
+      </div>
+
+      <div class="svc-grid">
+        <div class="svc-card">
+          <span class="nu">01</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+          <div class="body">
+            <h4>Senior engineering surge</h4>
+            <p>Named, vetted engineers, not generic resumes. Cleared resources available; team scaling 2-20 FTEs.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">02</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10 10 0 0 1 12 20c-7 0-10-8-10-8a18.45 18.45 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-2.16 3.19"></path><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg></div>
+          <div class="body">
+            <h4>White-label delivery</h4>
+            <p>All artifacts, code, comms, docs, demos, carry your prime brand. We never appear in agency-facing channels.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">03</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M16 2 v4 M8 2 v4 M3 10 h18"></path></svg></div>
+          <div class="body">
+            <h4>Sprint delivery under your PM</h4>
+            <p>We slot into your cadence, your tooling, your Definition of Done. Weekly burndown reports to your PM only.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">04</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 4 3.5 8 8 10 4.5-2 8-6 8-10V6z"></path></svg></div>
+          <div class="body">
+            <h4>Compliance posture maintained</h4>
+            <p>CJIS, HIPAA, IRS Pub 1075, StateRAMP-aligned controls applied to our work, inside your authorization boundary.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">05</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6 M9 13h6 M9 17h4"></path></svg></div>
+          <div class="body">
+            <h4>Documentation &amp; KT</h4>
+            <p>Living architecture docs, runbooks, and ATO artifacts. KT package delivered before each milestone close.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <span class="nu">06</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+          <div class="body">
+            <h4>IV&amp;V response support</h4>
+            <p>Findings remediation, audit responses, and CAP narratives, turned in your templates within SLA.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONSHORE PM-LED · OFFSHORE-ENGINEERED -->
+<section class="block onshore" id="onshore" data-screen-label="03 Onshore PM-led">
+  <div class="wrap">
+    <span class="eyebrow" style="margin-bottom: 14px; display: inline-flex; align-items: center;"><span class="gl"></span> Delivery model</span>
+    <div class="onshore-head">
+      <h2>Onshore PM-led. Offshore-engineered. Prime-controlled, end to end.</h2>
+      <p>US-based partner manager runs the engagement. Senior engineers in Lahore build the work. Agency sees the prime; the prime sees one accountable contact.</p>
+    </div>
+
+    <div class="clock-card">
+      <div class="clock-left">
+        <div class="label">24-hour delivery clock</div>
+        <h3>~10 hours of timezone overlap, same-day responses, overnight progress.</h3>
+      </div>
+      <div class="clock-right">
+        <div class="clock-ruler">
+          <span>12a</span><span>3a</span><span>6a</span><span>9a</span><span>12p</span><span>3p</span><span>6p</span><span>9p</span><span>12a</span>
+        </div>
+        <div class="clock-bars">
+          <div class="clock-bar pk">PK ENG · 11A-8P PKT</div>
+          <div class="clock-bar us">US PM · 9A-6P ET</div>
+        </div>
+        <div class="clock-footer">
+          <span>← Lahore picks up overnight</span>
+          <span class="mid">~10h overlap</span>
+          <span>US wraps the day →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="concerns-grid">
+      <div class="concern-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2 v2 M12 20 v2 M4.93 4.93 l1.41 1.41 M17.66 17.66 l1.41 1.41 M2 12 h2 M20 12 h2 M4.93 19.07 l1.41 -1.41 M17.66 6.34 l1.41 -1.41"></path></svg></div>
+        <div>
+          <div class="num">Concern 01</div>
+          <h4>Follow-the-sun delivery without the 3 a.m. Slack pings.</h4>
+          <div class="pain"><strong>Pain:</strong> offshore vendors that bury PMs in async messages, gap on handoffs, stall on US-hours blockers.</div>
+          <div class="fix"><strong>Our fix:</strong> US engagement manager owns daily standup. Lahore picks up overnight. ~10 hours of US/PK overlap, same-day responses.</div>
+        </div>
+      </div>
+
+      <div class="concern-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11 V7 a5 5 0 0 1 10 0 v4"></path></svg></div>
+        <div>
+          <div class="num">Concern 02</div>
+          <h4>NDA-bound from the first 30-minute call.</h4>
+          <div class="pain"><strong>Pain:</strong> capture leads who can't share the RFP or past-performance set until paperwork clears.</div>
+          <div class="fix"><strong>Our fix:</strong> Mutual NDA ready to sign before the discovery call. Sensitive details stay in encrypted channels with audit trails.</div>
+        </div>
+      </div>
+
+      <div class="concern-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V8 z"></path><path d="M14 2 v6 h6"></path><circle cx="10" cy="14" r="2"></circle><path d="M10 16 v3"></path></svg></div>
+        <div>
+          <div class="num">Concern 03</div>
+          <h4>IP assigned to you on day one.</h4>
+          <div class="pain"><strong>Pain:</strong> subcontractors who keep ownership of "reusable components" and license them back, complicating government IP rights.</div>
+          <div class="fix"><strong>Our fix:</strong> Period-of-performance IP assignment baked into the teaming letter. Code and artifacts belong to the prime.</div>
+        </div>
+      </div>
+
+      <div class="concern-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21 v-2 a4 4 0 0 0 -4 -4 H6 a4 4 0 0 0 -4 4 v2"></path><circle cx="9" cy="8" r="4"></circle><path d="M22 11 l-3 3 l-2 -2"></path></svg></div>
+        <div>
+          <div class="num">Concern 04</div>
+          <h4>Named seniors. No bait-and-switch.</h4>
+          <div class="pain"><strong>Pain:</strong> principal engineers on the proposal, junior engineers on delivery. CPARS pain that shows up at year-end review.</div>
+          <div class="fix"><strong>Our fix:</strong> Resumes you propose are the engineers who execute. Substitutions only with prime + agency approval.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK BEHIND A PRIME (dark band) -->
+<section class="block principles" data-screen-label="04 Operating principles">
+  <div class="wrap">
+    <div class="principles-inner">
+      <div class="left">
+        <span class="eyebrow">Operating Principles</span>
+        <h2>How we work behind a prime.</h2>
+        <p>Four non-negotiables that govern every engagement. Signed into our teaming letter so there's no ambiguity.</p>
+        <div class="locked">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11 V7 a5 5 0 0 1 10 0 v4"></path></svg>
+          Locked in teaming letter
+        </div>
+      </div>
+
+      <div class="principle-grid">
+        <div class="principle">
+          <span class="num">01</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10 10 0 0 1 12 20c-7 0-10-8-10-8a18.45 18.45 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-2.16 3.19"></path><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg></div>
+          <h3>You stay the only voice to the agency.</h3>
+          <p>Never in agency-facing emails, calls, or deliverables. No co-logos, no "powered by" footers. If the agency asks who built it, the answer is your name.</p>
+        </div>
+        <div class="principle">
+          <span class="num">02</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></div>
+          <h3>Your brand on every artifact.</h3>
+          <p>Code, docs, decks, runbooks, and dashboards ship under your prime brand. Internal IP licensed to you for the period of performance.</p>
+        </div>
+        <div class="principle">
+          <span class="num">03</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"></path><path d="M9 12 l2 2 l4 -4"></path></svg></div>
+          <h3>Compliance posture, kept.</h3>
+          <p>We operate inside your authorization boundary. CJIS, HIPAA, IRS Pub 1075, StateRAMP-aligned controls applied to our work. Audit-ready artifacts on demand.</p>
+        </div>
+        <div class="principle">
+          <span class="num">04</span>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="12" cy="18" r="3"></circle><path d="M6 9 v3 a2 2 0 0 0 2 2 h8 a2 2 0 0 0 2 -2 V9 M12 14 v1"></path></svg></div>
+          <h3>Prime PM owns the relationship.</h3>
+          <p>Status, escalations, and change requests flow through your PM. Weekly burndowns to you, never to the agency. You decide what to surface upstream.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="outcomes" data-screen-label="05 Outcomes">
+  <div class="wrap outcomes-inner">
+    <div class="head">
+      <span class="eyebrow">Outcomes that matter to primes</span>
+      <h2>What changes when Techtiz is on your team.</h2>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="n">5 <span class="small">days</span></div>
+        <div class="l">RFP decode turnaround</div>
+      </div>
+      <div class="stat">
+        <div class="n">100<span class="small">%</span></div>
+        <div class="l">GIS-tagged facility inventory · Bay County MMP</div>
+      </div>
+      <div class="stat">
+        <div class="n">0</div>
+        <div class="l">EGLE format deficiencies on first submission</div>
+      </div>
+      <div class="stat">
+        <div class="n">35<span class="small">/35</span></div>
+        <div class="l">Municipalities covered per-meeting briefing pack</div>
+      </div>
+      <div class="stat">
+        <div class="n">0</div>
+        <div class="l">Late quarterly grant reports filed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKBONE (capabilities) -->
+<section class="block" data-screen-label="06 Backbone">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="left">
+        <span class="eyebrow">The Techtiz SLED Backbone</span>
+        <h2>The platform you plug into.</h2>
+        <p class="sub">Six capabilities, one stack. Built for the RFP work no off-the-shelf product covers cleanly.</p>
+      </div>
+      <div class="right"><a href="capabilities.html">Full capability matrix →</a></div>
+    </div>
+
+    <div class="backbone-grid">
+      <a class="cap-card backbone-card" href="capabilities.html">
+        <div class="icon-badge">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V8 z"></path><path d="M14 2 v6 h6"></path><path d="M9 13 h6 M9 17 h4"></path></svg></div>
+          <span class="badge-no">01 · Decode</span>
+        </div>
+        <h3>RFP Decode Engine</h3>
+        <p>Strategic analysis of evaluation criteria, statutory traps, and timeline realities. Five-day turnaround.</p>
+      </a>
+      <a class="cap-card backbone-card" href="capabilities.html">
+        <div class="icon-badge">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10 c0 7 -9 13 -9 13 s-9 -6 -9 -13 a9 9 0 0 1 18 0 z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+          <span class="badge-no">02 · Map</span>
+        </div>
+        <h3>GIS &amp; Data Layer</h3>
+        <p>Facility inventories, forecast models, supply chain analysis. ArcGIS, PostGIS, GeoPandas.</p>
+      </a>
+      <a class="cap-card backbone-card" href="capabilities.html">
+        <div class="icon-badge">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21 v-2 a4 4 0 0 0 -4 -4 H5 a4 4 0 0 0 -4 4 v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21 v-2 a4 4 0 0 0 -3 -3.87"></path><path d="M16 3.13 a4 4 0 0 1 0 7.75"></path></svg></div>
+          <span class="badge-no">03 · Engage</span>
+        </div>
+        <h3>Engagement Cloud</h3>
+        <p>Public surveys, multilingual platforms, comment capture, disadvantaged-community reach.</p>
+      </a>
+      <a class="cap-card backbone-card" href="capabilities.html">
+        <div class="icon-badge">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15 v4 a2 2 0 0 1 -2 2 H5 a2 2 0 0 1 -2 -2 v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+          <span class="badge-no">04 · Produce</span>
+        </div>
+        <h3>Document Production Suite</h3>
+        <p>Statutory-format compliant deliverables in PDF, InDesign, ArcGIS, Word, Excel. EGLE-validated.</p>
+      </a>
+      <a class="cap-card backbone-card" href="capabilities.html">
+        <div class="icon-badge">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+          <span class="badge-no">05 · Report</span>
+        </div>
+        <h3>Grant Reporting Automation</h3>
+        <p>Quarterly milestone reports generated from project delivery data. Zero late filings.</p>
+      </a>
+      <a class="cap-card backbone-card" href="capabilities.html">
+        <div class="icon-badge">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"></path></svg></div>
+          <span class="badge-no">06 · Comply</span>
+        </div>
+        <h3>Statutory Compliance Layer</h3>
+        <p>Plan-content checklists, adoption-sequence tracking, audit trails per state framework.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RECENT RFPS -->
+<section class="block" style="background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);" data-screen-label="07 Recent RFPs">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="left">
+        <span class="eyebrow">Recent RFPs we've decoded</span>
+        <h2>The evidence is the analysis.</h2>
+        <p class="sub">Six decodes published across four RFP families. Each one a permanent capability artifact.</p>
+      </div>
+      <div class="right"><a href="case-studies.html">All case studies →</a></div>
+    </div>
+
+    <div class="rfp-grid">
+      <a class="rfp-card" href="case-study-2026-08.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"></path></svg></div>
+        <div class="rfp-num">RFP 2026-08</div>
+        <div class="rfp-title">Professional Consulting Services for Bay County Materials Management Plan</div>
+        <div class="rfp-meta"><span>Michigan</span><span>MMP</span><span>$390K to $620K</span></div>
+        <div class="rfp-hook">"Why fee-priced bids systematically lose this RFP."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-studies.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21 h18"></path><path d="M6 21 V8 l6 -4 l6 4 v13"></path></svg></div>
+        <div class="rfp-num">RFP 2025-31</div>
+        <div class="rfp-title">Statewide Digital Service Modernization &amp; WCAG 2.2 AA Conformance</div>
+        <div class="rfp-meta"><span>Oregon</span><span>WCAG</span><span>$1.2M to $1.8M</span></div>
+        <div class="rfp-hook">"Six accessibility traps that disqualify late-stage bids."</div>
+        <span class="rfp-link">Read the decode</span>
+      </a>
+
+      <a class="rfp-card" href="case-studies.html">
+        <span class="status decoded">Decoded</span>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M3 12 h18 M12 3 a14 14 0 0 1 0 18"></path></svg></div>
+        <div class="rfp-num">RFP 2026-12</div>
+        <div class="rfp-title">Statewide Permitting Platform Modernization · Phase 2</div>
+        <div class="rfp-meta"><span>Colorado</span><span>Permitting</span><span>$2.4M to $3.1M</span></div>
+        <div class="rfp-hook">"How a 12-week pilot beats a 9-month RFP build-out."</div>
+        <span class="rfp-link">Read the analysis</span>
+      </a>
+    </div>
+
+    <div class="see-all-link">
+      <a href="case-studies.html">See all 6 decoded RFPs and our delivered engagements →</a>
+    </div>
+  </div>
+</section>
+
+<!-- EASY TO PUT ON CONTRACT (procurement vehicles) -->
+<section class="block vehicles" id="vehicles" data-screen-label="08 Vehicles">
+  <div class="wrap">
+    <span class="eyebrow" style="margin-bottom: 14px; display: inline-flex; align-items: center;"><span class="gl"></span> Procurement Vehicles</span>
+    <div class="vh-head">
+      <h2>Easy to put on contract.</h2>
+      <div class="sub-area">
+        <p class="sub-text">We work through your existing vehicles. Tell us how the agency buys and we'll structure the teaming agreement to fit.</p>
+        <div class="email-line">Don't see your vehicle?<br/>Email <a href="mailto:contracts@techtiz.co">contracts@techtiz.co</a></div>
+      </div>
+    </div>
+
+    <div class="vehicles-grid">
+      <div class="vehicle">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22 l-5 -3 -5 3 1.523 -9.11"></path></svg></div>
+        <div>
+          <h4>NASPO ValuePoint</h4>
+          <div class="v-sub">Multi-state cooperative, via prime</div>
+          <div class="v-note">50 states eligible</div>
+        </div>
+      </div>
+      <div class="vehicle">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+        <div>
+          <h4>GSA MAS / IT-70</h4>
+          <div class="v-sub">Federal schedule, via prime</div>
+          <div class="v-note">Cooperative purchase eligible</div>
+        </div>
+      </div>
+      <div class="vehicle">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V8 z"></path><path d="M14 2 v6 h6 M9 13 h6 M9 17 h4"></path></svg></div>
+        <div>
+          <h4>State Master Agreements</h4>
+          <div class="v-sub">CA CMAS, NY OGS, TX DIR, prime-held</div>
+          <div class="v-note">8 active states</div>
+        </div>
+      </div>
+      <div class="vehicle">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11 H4 a2 2 0 0 0 -2 2 v6 a2 2 0 0 0 2 2 h2 a2 2 0 0 0 2 -2 z"></path><path d="M22 11 a4 4 0 0 0 -4 -4 h-1.26 a8 8 0 0 0 -7.52 -5 H4 a2 2 0 0 0 0 4 v8"></path></svg></div>
+        <div>
+          <h4>Direct Subcontract</h4>
+          <div class="v-sub">Prime-contractor teaming letter</div>
+          <div class="v-note">Standard 7-day turnaround</div>
+        </div>
+      </div>
+      <div class="vehicle">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21 V8 l6 -3 l6 3 v13"></path><path d="M9 21 V13 M15 13 H21 V21"></path><path d="M3 21 h18"></path></svg></div>
+        <div>
+          <h4>Local Co-ops</h4>
+          <div class="v-sub">OMNIA, Sourcewell, regional</div>
+          <div class="v-note">Via partner primes</div>
+        </div>
+      </div>
+      <div class="vehicle">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V8 z"></path><path d="M14 2 v6 h6"></path><circle cx="11" cy="15" r="2"></circle><path d="M13 17 l2 2"></path></svg></div>
+        <div>
+          <h4>Open RFP / RFQ</h4>
+          <div class="v-sub">Bid support as named subcontractor</div>
+          <div class="v-note">14 wins last 24 mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TECHTIZ -->
+<section class="block" style="background: var(--white); border-top: 1px solid var(--line);" data-screen-label="09 Why Techtiz">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="left">
+        <span class="eyebrow">Why Techtiz</span>
+        <h2>Three answers to three questions every prime asks.</h2>
+      </div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="num">01 · Pattern recognition</div>
+        <h3>We've read the RFPs in your pipeline.</h3>
+        <p>Not one RFP in one family. We've decoded 21 across five families. The patterns evaluation committees weight become legible only across the category.</p>
+        <div class="counter"><em>Counter to</em> "do you understand U.S. SLED?"</div>
+      </div>
+
+      <div class="why-card">
+        <div class="num">02 · Back-office only</div>
+        <h3>We never face the agency.</h3>
+        <p>Our model depends on being the partner that makes your delivery stronger, not the firm that walks past you into procurement. We engage only through a prime. No exceptions.</p>
+        <div class="counter"><em>Counter to</em> "will you go around us?"</div>
+      </div>
+
+      <div class="why-card">
+        <div class="num">03 · Your terms</div>
+        <h3>We work on your contract.</h3>
+        <p>Subcontract under your master agreement. Insurance routes through you. IP per your standard NDA. We adapt to your delivery model. You don't adapt to ours.</p>
+        <div class="counter"><em>Counter to</em> "how risky is this operationally?"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIN IT. DELIVER IT. QUIETLY. (inquiry) -->
+<section class="inquiry" id="inquiry" data-screen-label="10 Inquiry form">
+  <div class="wrap">
+    <div class="inquiry-shell">
+      <aside class="inquiry-left">
+        <span class="eyebrow">Partner with us</span>
+        <h2>Decode it. Deliver it. Quietly.</h2>
+        <p>21 days from submission or 21 days from kickoff, tell us where you need back-office engineering. A US partner manager replies within one business day with draft scope and teaming letter.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12 l2.5 2.5 L16 9"></path></svg> One business day response</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12 l2.5 2.5 L16 9"></path></svg> Mutual NDA on first contact</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12 l2.5 2.5 L16 9"></path></svg> Teaming letter template included</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12 l2.5 2.5 L16 9"></path></svg> White-label clause built-in</li>
+        </ul>
+      </aside>
+
+      <form class="inquiry-right" onsubmit="event.preventDefault(); alert('Demo form. Wire to your CRM.');">
+        <div>
+          <label class="field-label">What do you need help with? <span class="req">*</span></label>
+          <div class="need-row">
+            <div class="need-card on" data-need="pre">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+              <div class="body">
+                <h5>Pre-Award Support</h5>
+                <p>Decode, writing, demos</p>
+              </div>
+              <div class="check"></div>
+            </div>
+            <div class="need-card" data-need="post">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5 L3 21 l4.5 -1.5 M14 6 l4 4 -8 8 -4 0 0 -4 z"></path></svg></div>
+              <div class="body">
+                <h5>Post-Award Delivery</h5>
+                <p>Engineers, sprints, KT</p>
+              </div>
+              <div class="check"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label class="field-label">Company <span class="req">*</span></label>
+            <input type="text" placeholder="Prime contractor name" required />
+          </div>
+          <div>
+            <label class="field-label">Your role</label>
+            <input type="text" placeholder="e.g. Capture Manager, Delivery Lead" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label class="field-label">Contract vehicle</label>
+            <select>
+              <option value="">Select…</option>
+              <option>NASPO ValuePoint</option>
+              <option>GSA MAS / IT-70</option>
+              <option>State Master Agreement</option>
+              <option>Direct Subcontract</option>
+              <option>Local Co-op</option>
+              <option>Open RFP / RFQ</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label">Agency / end customer</label>
+            <input type="text" placeholder="e.g. NC DHHS, we never contact directly" />
+          </div>
+        </div>
+
+        <div class="form-row single">
+          <div>
+            <label class="field-label">Engagement description, contract #, scope needed, start date</label>
+            <textarea placeholder="Tell us about the pursuit and/or the active contract. What phase, what scope, what timing…"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label class="field-label">Email <span class="req">*</span></label>
+            <input type="email" placeholder="you@prime.com" required />
+          </div>
+          <div>
+            <label class="field-label">Phone</label>
+            <input type="tel" placeholder="+1 (XXX) XXX-XXXX" />
+          </div>
+        </div>
+
+        <div class="inquiry-foot">
+          <div class="nda">By submitting, you agree to a mutual NDA on first substantive contact.</div>
+          <button type="submit" class="send-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            Send Inquiry
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand-foot">
+        <a href="../Homepage.html" class="brand-mark"><img src="../assets/logo-light.svg" alt="Techtiz" class="brand-logo" /></a>
+        <p>An AI-native engineering studio building adaptive systems for ambitious teams.</p>
+        <div class="socials">
+          <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.6 18.3v-7.6H6.07v7.6H8.6m-1.27-8.67a1.45 1.45 0 0 0 1.45-1.45A1.45 1.45 0 0 0 7.33 6.7a1.46 1.46 0 0 0-1.46 1.46 1.46 1.46 0 0 0 1.46 1.45m11 8.67v-4.18c0-2.2-1.18-3.22-2.76-3.22a2.38 2.38 0 0 0-2.16 1.19v-1.02h-2.45v7.6h2.53v-4.22c0-1.12.43-1.78 1.39-1.78s1.4.62 1.4 1.78v4.22h2.55z"></path></svg></a>
+          <a href="#" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2H21l-6.5 7.4L22 22h-6.6l-5.2-6.8L4.2 22H1.5l7-8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.2 4H5.3l11.7 16z"></path></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>U.S. Public Sector</h5>
+        <ul>
+          <li><a href="index.html">SLED Hub</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="#vehicles">Procurement Vehicles</a></li>
+          <li><a href="#two-stages">For Primes</a></li>
+          <li><a href="contact.html">SLED Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#">Development</a></li>
+          <li><a href="#">AI &amp; Intelligence</a></li>
+          <li><a href="#">Automation</a></li>
+          <li><a href="#">Digital Transformation</a></li>
+          <li><a href="#">UX Design</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Industries</h5>
+        <ul>
+          <li><a href="#">Healthcare</a></li>
+          <li><a href="#">Digital Marketing</a></li>
+          <li><a href="#">Real Estate</a></li>
+          <li><a href="#">E-commerce</a></li>
+          <li><a href="#">Logistics</a></li>
+          <li><a href="#">Education</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="strip">
+      <div>© 2026 Techtiz · Lahore HQ · U.S. office</div>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // -------- Mega-menu hover/click ----------
+  (function(){
+    const items = document.querySelectorAll('.nav-item');
+    let openTimer = null;
+    let closeTimer = null;
+
+    function openItem(el){
+      items.forEach(i => { if(i !== el) i.classList.remove('open'); });
+      el.classList.add('open');
+      const btn = el.querySelector('.nav-link');
+      if(btn) btn.setAttribute('aria-expanded','true');
+    }
+    function closeAll(){
+      items.forEach(i => {
+        i.classList.remove('open');
+        const btn = i.querySelector('.nav-link');
+        if(btn) btn.setAttribute('aria-expanded','false');
+      });
+    }
+
+    items.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimer);
+        openTimer = setTimeout(() => openItem(item), 80);
+      });
+      item.addEventListener('mouseleave', () => {
+        clearTimeout(openTimer);
+        closeTimer = setTimeout(closeAll, 180);
+      });
+      const btn = item.querySelector('.nav-link');
+      if(btn){
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          if(item.classList.contains('open')) { closeAll(); } else { openItem(item); }
+        });
+      }
+    });
+
+    document.addEventListener('click', e => {
+      if(!e.target.closest('.nav-item')) closeAll();
+    });
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape') closeAll();
+    });
+  })();
+
+  // -------- Mega-menu hovered item swap ----------
+  (function(){
+    const data = {
+      services: {
+        development: { title: 'Development', desc: 'Build robust, scalable digital products designed to grow with your business.', subs: ['Custom Software','Mobile Apps','Low code / No-code Dev','Vibe code Dev'] },
+        ai: { title: 'AI & Intelligence', desc: 'LLM systems, RAG, agents, and ML pipelines that ship and stay in production.', subs: ['Agent platforms','RAG pipelines','Fine-tuning','Evals & observability'] },
+        automation: { title: 'Automation & AI Solutions', desc: 'Internal tools and workflows that pay for themselves.', subs: ['RPA','Workflow engines','Integrations','Ops automation'] },
+        transformation: { title: 'Digital Transformation', desc: 'Modernize legacy stacks without halting the business.', subs: ['Strategy','Migrations','Data platforms','Change management'] },
+        ux: { title: 'UX Design / Enablement', desc: 'Research-backed interfaces that feel inevitable.', subs: ['User research','Design systems','Prototyping','Brand'] },
+      },
+      industries: {
+        healthcare: { title: 'Healthcare', desc: 'Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.', subs: ['AI Appointment Management','AI-Powered Communication','Reporting Optimization','Patient Records'] },
+        marketing: { title: 'Digital Marketing', desc: 'Growth platforms, attribution, and content systems for performance teams.', subs: ['Attribution','Campaign analytics','Content systems','Lifecycle ops'] },
+        realestate: { title: 'Real Estate', desc: 'Listings, CRM, and transaction platforms for brokerages and proptech.', subs: ['Listings platforms','CRM','Deal rooms','Tenant portals'] },
+        ecommerce: { title: 'E-commerce', desc: 'Shopify, headless storefronts, OMS integrations, and conversion ops.', subs: ['Shopify Plus','Headless','OMS integrations','Conversion'] },
+        logistics: { title: 'Logistics & Supply Chain', desc: 'Routing, WMS, and visibility platforms for operators and 3PLs.', subs: ['Routing','WMS','Visibility','Carrier integrations'] },
+        education: { title: 'Education', desc: 'LMS, LXP, and assessment tools for institutions and edtech.', subs: ['LMS','LXP','Assessment','Student platforms'] },
+      }
+    };
+
+    document.querySelectorAll('[data-list]').forEach(list => {
+      const key = list.dataset.list;
+      const featBlock = document.querySelector('[data-feature="'+key+'"]');
+      const subBlock = document.querySelector('[data-sublinks="'+key+'"]');
+      list.querySelectorAll('.mega-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          list.querySelectorAll('.mega-item').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          const k = item.dataset.key;
+          const d = data[key][k];
+          if(!d || !featBlock || !subBlock) return;
+          featBlock.querySelector('[data-feat-title]').textContent = d.title;
+          featBlock.querySelector('[data-feat-desc]').textContent = d.desc;
+          subBlock.innerHTML = d.subs.map(s => '<a href="#">'+s+'</a>').join('');
+        });
+      });
+    });
+  })();
+
+  // -------- Stage tabs (Pre-Bid / Post-Bid) ----------
+  (function(){
+    const buttons = document.querySelectorAll('.toggle-pill button[data-stage]');
+    const panels = document.querySelectorAll('.stage-panel');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.stage;
+        buttons.forEach(b => {
+          b.classList.toggle('on', b === btn);
+          b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+        });
+        panels.forEach(p => p.classList.toggle('show', p.dataset.panel === target));
+      });
+    });
+  })();
+
+  // -------- Pre/Post inquiry checkboxes ----------
+  (function(){
+    const cards = document.querySelectorAll('.need-card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('on'));
+    });
+  })();
+
+  // -------- Subnav scroll-spy + smooth scroll ----------
+  (function(){
+    const links = document.querySelectorAll('.sub-links [data-spy-id]');
+    const map = new Map();
+    links.forEach(a => {
+      const id = a.dataset.spyId;
+      const el = document.getElementById(id);
+      if(el) map.set(el, a);
+      a.addEventListener('click', e => {
+        if(a.getAttribute('href').startsWith('#')){
+          e.preventDefault();
+          const target = document.getElementById(a.getAttribute('href').slice(1));
+          if(target){
+            const y = target.getBoundingClientRect().top + window.scrollY - 130;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+          }
+        }
+      });
+    });
+    if(!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          links.forEach(l => l.classList.remove('on'));
+          const link = map.get(entry.target);
+          if(link) link.classList.add('on');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    map.forEach((_, el) => io.observe(el));
+  })();
+</script>
+</body>
+</html>

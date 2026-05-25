@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Techtiz — Build the systems that move your business forward</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --yale: #153A5F;
+    --yale-dark: #0E2640;
+    --cyan: #18B0E6;
+    --cyan-soft: #E6F6FC;
+    --seasalt: #F8F8F8;
+    --ink: #1B2430;
+    --muted: #5B6776;
+    --line: #D9DEE5;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: var(--seasalt);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; cursor: pointer; }
+  button { font-family: inherit; cursor: pointer; border: 0; background: none; }
+  img { display: block; max-width: 100%; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+  .eyebrow.dark { color: var(--yale); }
+  h1, h2, h3, h4 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    color: var(--yale);
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  p { margin: 0; }
+
+  /* tilted square motif */
+  .tsq {
+    width: 14px; height: 14px;
+    background: var(--cyan);
+    transform: rotate(15deg);
+    display: inline-block;
+  }
+  .tsq.outline {
+    background: transparent;
+    border: 2px solid var(--cyan);
+  }
+  .tsq-row { display: inline-flex; gap: 10px; align-items: center; }
+
+  /* --- Header --- */
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 800; font-size: 19px;
+    color: var(--yale);
+    letter-spacing: -0.01em;
+  }
+  .logo .glyph {
+    width: 32px; height: 32px;
+    position: relative;
+  }
+  .logo .glyph::before, .logo .glyph::after {
+    content: ""; position: absolute; width: 18px; height: 18px;
+    transform: rotate(15deg);
+  }
+  .logo .glyph::before { background: var(--yale); left: 0; top: 0; }
+  .logo .glyph::after { background: var(--cyan); right: 0; bottom: 0; opacity: 0.9; }
+
+  nav.menu {
+    display: flex; align-items: center; gap: 32px;
+  }
+  nav.menu a {
+    font-size: 14.5px; font-weight: 500; color: var(--ink);
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: color 180ms ease;
+  }
+  nav.menu a:hover { color: var(--yale); }
+  nav.menu a .chev { width: 10px; height: 10px; border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor; transform: rotate(45deg) translateY(-2px); opacity: 0.55; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--cyan); color: var(--yale-dark);
+    font-weight: 700; font-size: 14.5px;
+    padding: 11px 18px; border-radius: 8px;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+  .cta:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(24,176,230,0.6); }
+  .cta .arr { width: 14px; height: 14px; position: relative; }
+  .cta .arr::before { content: ""; position: absolute; inset: 0; border-top: 1.8px solid currentColor; border-right: 1.8px solid currentColor; transform: rotate(45deg); width: 8px; height: 8px; top: 3px; right: 2px; }
+  .cta .arr::after { content: ""; position: absolute; left: 0; right: 4px; top: 6px; height: 1.8px; background: currentColor; }
+
+  /* --- Hero --- */
+  .hero {
+    position: relative;
+    padding: 80px 0 96px;
+    overflow: hidden;
+  }
+  .hero-corner {
+    position: absolute; right: -60px; top: 40px;
+    width: 320px; height: 320px;
+    pointer-events: none;
+  }
+  .hero-corner .tsq {
+    position: absolute;
+    width: 28px; height: 28px;
+    opacity: 0.18;
+  }
+  .hero-corner .tsq.s1 { right: 100px; top: 0; opacity: 0.35; }
+  .hero-corner .tsq.s2 { right: 60px; top: 40px; opacity: 0.22; width: 22px; height: 22px; }
+  .hero-corner .tsq.s3 { right: 140px; top: 56px; opacity: 0.18; width: 18px; height: 18px; }
+  .hero-corner .tsq.s4 { right: 180px; top: 18px; opacity: 0.12; width: 14px; height: 14px; }
+  .hero-corner .tsq.s5 { right: 24px; top: 88px; opacity: 0.30; width: 36px; height: 36px; }
+  .hero-corner .tsq.s6 { right: 100px; top: 110px; opacity: 0.10; width: 26px; height: 26px; }
+
+  .hero-head {
+    max-width: 900px;
+    margin-bottom: 56px;
+    position: relative; z-index: 2;
+  }
+  .hero-head .eyebrow { margin-bottom: 18px; }
+  .hero-head h1 {
+    font-size: 68px;
+    line-height: 1.02;
+    margin-bottom: 22px;
+  }
+  .hero-head h1 .accent {
+    color: var(--cyan);
+    display: inline-block;
+  }
+  .hero-head .sub {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 640px;
+    line-height: 1.5;
+  }
+
+  /* Router panels */
+  .router {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    position: relative; z-index: 2;
+  }
+  .panel {
+    position: relative;
+    padding: 36px 36px 32px;
+    border-radius: 12px;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .panel:hover { transform: translateY(-3px); }
+  .panel .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 14px;
+  }
+  .panel h2 {
+    font-size: 32px; line-height: 1.1;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+  .panel .desc { font-size: 15px; line-height: 1.55; margin-bottom: 28px; max-width: 380px; }
+  .panel .triplet {
+    display: flex; gap: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: auto;
+  }
+  .panel .triplet span { position: relative; }
+  .panel .triplet span + span::before { content: ""; position: absolute; left: -10px; top: 50%; width: 2px; height: 2px; background: currentColor; transform: translateY(-50%); border-radius: 50%; }
+  .panel .go {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 15px; font-weight: 700;
+    padding-top: 28px;
+    margin-top: 28px;
+    border-top: 1px solid;
+    transition: gap 200ms ease;
+  }
+  .panel:hover .go { gap: 20px; }
+  .panel .go .arr {
+    width: 22px; height: 1.6px; background: currentColor; position: relative;
+  }
+  .panel .go .arr::after {
+    content: ""; position: absolute; right: 0; top: -4px;
+    width: 9px; height: 9px;
+    border-top: 1.6px solid currentColor;
+    border-right: 1.6px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .panel.light {
+    background: var(--white);
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .panel.light h2 { color: var(--yale); }
+  .panel.light .desc { color: var(--muted); }
+  .panel.light .go { color: var(--yale); border-color: var(--line); }
+  .panel.light:hover { box-shadow: 0 18px 40px -16px rgba(21,58,95,0.18); border-color: #C9D2DE; }
+
+  .panel.dark {
+    background: var(--yale);
+    color: var(--white);
+  }
+  .panel.dark h2 { color: var(--white); }
+  .panel.dark .desc { color: rgba(255,255,255,0.78); }
+  .panel.dark .go { color: var(--cyan); border-color: rgba(255,255,255,0.18); }
+  .panel.dark:hover { box-shadow: 0 22px 50px -18px rgba(14,38,64,0.45); }
+  .panel.dark .pattern {
+    position: absolute; right: -40px; top: -40px; width: 260px; height: 260px;
+    pointer-events: none;
+  }
+  .panel.dark .pattern .tsq { position: absolute; }
+  .panel.dark .pattern .tsq.p1 { right: 60px; top: 30px; width: 26px; height: 26px; opacity: 0.5; }
+  .panel.dark .pattern .tsq.p2 { right: 24px; top: 64px; width: 38px; height: 38px; opacity: 0.65; }
+  .panel.dark .pattern .tsq.p3 { right: 100px; top: 80px; width: 18px; height: 18px; opacity: 0.35; }
+  .panel.dark .pattern .tsq.p4 { right: 70px; top: 120px; width: 22px; height: 22px; opacity: 0.22; }
+  .panel.dark .pattern .tsq.p5 { right: 30px; top: 160px; width: 14px; height: 14px; opacity: 0.55; }
+  .panel.dark .corner-tag {
+    position: absolute; bottom: 24px; right: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    opacity: 0.85;
+  }
+
+  /* Logo wall */
+  .logo-wall {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0;
+    background: var(--white);
+  }
+  .logo-wall .row {
+    display: grid; grid-template-columns: 180px repeat(5, 1fr); gap: 24px;
+    align-items: center;
+  }
+  .logo-wall .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .logo-wall .client {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; color: var(--yale); font-size: 17px;
+    letter-spacing: -0.01em;
+    opacity: 0.75;
+    transition: opacity 200ms ease;
+  }
+  .logo-wall .client:hover { opacity: 1; }
+  .logo-wall .client .dot {
+    width: 10px; height: 10px; background: var(--yale); transform: rotate(15deg);
+  }
+  .logo-wall .client.alt .dot { background: var(--cyan); }
+
+  /* What we do */
+  section.block { padding: 100px 0; }
+  section.block.tight { padding: 80px 0; }
+  .block-head {
+    display: flex; justify-content: space-between; align-items: end;
+    margin-bottom: 48px;
+    gap: 48px;
+  }
+  .block-head .left { max-width: 640px; }
+  .block-head h2 {
+    font-size: 44px; line-height: 1.05;
+    margin-top: 12px;
+    letter-spacing: -0.02em;
+  }
+  .block-head .right {
+    font-size: 16px; color: var(--muted); max-width: 360px;
+    text-align: right;
+  }
+
+  .cap-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .cap {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 16px;
+    min-height: 260px;
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+  .cap:hover {
+    transform: translateY(-2px);
+    border-color: #C9D2DE;
+    box-shadow: 0 18px 36px -18px rgba(21,58,95,0.18);
+  }
+  .cap .icon {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: var(--cyan-soft);
+    color: var(--cyan);
+    display: grid; place-items: center;
+  }
+  .cap .icon svg { width: 22px; height: 22px; }
+  .cap h3 { font-size: 22px; color: var(--yale); line-height: 1.2; }
+  .cap p { font-size: 14.5px; color: var(--muted); line-height: 1.55; }
+  .cap .more {
+    margin-top: auto;
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--yale); font-weight: 700; font-size: 14px;
+    transition: gap 200ms ease;
+  }
+  .cap:hover .more { gap: 14px; color: var(--cyan); }
+  .cap .more::after {
+    content: "→"; font-size: 16px; font-weight: 600;
+  }
+
+  /* Proof bar */
+  .proof {
+    background: var(--yale);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .proof::before {
+    content: ""; position: absolute; right: -30px; top: -30px;
+    width: 220px; height: 220px;
+    background:
+      linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.18) 48% 52%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, rgba(24,176,230,0.10) 48% 52%, transparent 52%);
+    background-size: 28px 28px;
+    transform: rotate(15deg);
+    opacity: 0.7;
+  }
+  .proof-inner {
+    display: grid; grid-template-columns: 1fr repeat(4, auto); gap: 56px;
+    padding: 56px 0;
+    align-items: center;
+  }
+  .proof .head { max-width: 280px; }
+  .proof .head .eyebrow { color: var(--cyan); margin-bottom: 10px; display: block; }
+  .proof .head h3 { color: var(--white); font-size: 24px; line-height: 1.2; }
+  .proof .stat .n {
+    font-size: 48px; font-weight: 800;
+    color: var(--cyan);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .proof .stat .l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    max-width: 130px;
+    line-height: 1.4;
+  }
+
+  /* Featured case studies */
+  .cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .case {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .case:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -16px rgba(21,58,95,0.18); }
+  .case .thumb {
+    aspect-ratio: 5 / 3;
+    position: relative;
+    overflow: hidden;
+  }
+  .case .thumb .bg {
+    position: absolute; inset: 0;
+    background-size: 16px 16px;
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 12px);
+  }
+  .case .thumb .stamp {
+    position: absolute; top: 16px; left: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(0,0,0,0.18);
+    padding: 6px 10px; border-radius: 4px;
+    backdrop-filter: blur(4px);
+  }
+  .case .thumb .label {
+    position: absolute; bottom: 18px; left: 20px; right: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.10em;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+  .case.t1 .thumb { background: linear-gradient(135deg, #1E4A78, #0E2640); }
+  .case.t2 .thumb { background: linear-gradient(135deg, #18B0E6, #0F6E94); }
+  .case.t3 .thumb { background: linear-gradient(135deg, #153A5F, #2A6FA0); }
+  .case .thumb .glyph {
+    position: absolute; right: -10px; bottom: -10px;
+    width: 140px; height: 140px;
+  }
+  .case .thumb .glyph .tsq { position: absolute; }
+  .case .thumb .glyph .tsq.a { right: 30px; bottom: 50px; width: 36px; height: 36px; background: rgba(255,255,255,0.18); }
+  .case .thumb .glyph .tsq.b { right: 60px; bottom: 20px; width: 28px; height: 28px; background: rgba(255,255,255,0.12); }
+  .case .thumb .glyph .tsq.c { right: 12px; bottom: 80px; width: 20px; height: 20px; background: rgba(24,176,230,0.7); }
+  .case .body { padding: 24px 24px 26px; display: flex; flex-direction: column; flex: 1; }
+  .case .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 12px;
+  }
+  .case h3 { font-size: 20px; color: var(--yale); margin-bottom: 14px; line-height: 1.25; }
+  .case p { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 20px; }
+  .case .more { color: var(--yale); font-weight: 700; font-size: 13.5px; margin-top: auto; }
+  .case .more::after { content: " →"; }
+
+  /* SLED band with Capitol */
+  .sled-band {
+    position: relative;
+    background: var(--yale-dark);
+    color: var(--white);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .sled-band .capitol {
+    position: absolute; inset: 0;
+    background-image: url('assets/capitol.png');
+    background-size: cover;
+    background-position: center 30%;
+    opacity: 0.22;
+    filter: saturate(0.6);
+    z-index: 0;
+  }
+  .sled-band .overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(14,38,64,0.96) 0%, rgba(14,38,64,0.82) 55%, rgba(14,38,64,0.55) 100%),
+      linear-gradient(180deg, rgba(14,38,64,0.4), rgba(14,38,64,0.85));
+    z-index: 1;
+  }
+  .sled-band .grain {
+    position: absolute; inset: 0; z-index: 2;
+    background-image: repeating-linear-gradient(135deg, rgba(24,176,230,0.07) 0 1px, transparent 1px 10px);
+    pointer-events: none;
+  }
+  .sled-band .tsq-cluster {
+    position: absolute; right: 60px; top: 50%;
+    transform: translateY(-50%);
+    width: 320px; height: 320px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .sled-band .tsq-cluster .tsq { position: absolute; }
+  .sled-band .tsq-cluster .tsq.k1 { right: 60px; top: 40px; width: 44px; height: 44px; opacity: 0.85; }
+  .sled-band .tsq-cluster .tsq.k2 { right: 130px; top: 90px; width: 32px; height: 32px; opacity: 0.6; }
+  .sled-band .tsq-cluster .tsq.k3 { right: 30px; top: 150px; width: 56px; height: 56px; opacity: 0.45; }
+  .sled-band .tsq-cluster .tsq.k4 { right: 140px; top: 200px; width: 24px; height: 24px; opacity: 0.7; }
+  .sled-band .tsq-cluster .tsq.k5 { right: 200px; top: 60px; width: 18px; height: 18px; opacity: 0.5; }
+  .sled-band .tsq-cluster .tsq.k6 { right: 110px; top: 250px; width: 30px; height: 30px; border: 2px solid var(--cyan); background: transparent; opacity: 0.7; }
+  .sled-band .tsq-cluster .tsq.k7 { right: 220px; top: 170px; width: 22px; height: 22px; border: 2px solid var(--cyan); background: transparent; opacity: 0.55; }
+
+  .sled-band .inner {
+    position: relative; z-index: 4;
+    padding: 110px 0;
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .sled-band .eyebrow { color: var(--cyan); display: inline-flex; align-items: center; gap: 10px; }
+  .sled-band .new-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cyan);
+    padding: 6px 10px;
+    border: 1px solid rgba(24,176,230,0.4);
+    border-radius: 4px;
+    margin-bottom: 22px;
+  }
+  .sled-band .new-pill .tsq { width: 8px; height: 8px; }
+  .sled-band h2 {
+    color: var(--white);
+    font-size: 52px; line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+  }
+  .sled-band h2 .accent { color: var(--cyan); }
+  .sled-band .body {
+    color: rgba(255,255,255,0.78);
+    font-size: 17px; line-height: 1.6;
+    max-width: 580px;
+    margin-bottom: 32px;
+  }
+  .sled-band .cta-row { display: flex; gap: 14px; margin-bottom: 40px; }
+  .sled-band .cta-row .cta-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14.5px; font-weight: 700;
+    color: var(--white);
+    padding: 11px 18px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.32);
+    transition: border-color 180ms ease, background 180ms ease;
+  }
+  .sled-band .cta-row .cta-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+  .sled-band .trust {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    max-width: 640px;
+  }
+  .sled-band .trust .item .l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 4px;
+  }
+  .sled-band .trust .item .v {
+    font-size: 14px; color: rgba(255,255,255,0.88);
+    font-weight: 500;
+  }
+  .sled-band .side {
+    position: relative;
+    z-index: 4;
+  }
+  .sled-card {
+    background: rgba(14,38,64,0.55);
+    border: 1px solid rgba(24,176,230,0.25);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 32px 28px;
+  }
+  .sled-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 14px;
+  }
+  .sled-card h3 { color: var(--white); font-size: 22px; margin-bottom: 24px; line-height: 1.25; }
+  .sled-card .flow { display: flex; flex-direction: column; gap: 14px; }
+  .sled-card .flow .step {
+    display: grid; grid-template-columns: 28px 1fr; gap: 14px;
+    align-items: center;
+  }
+  .sled-card .flow .step .n {
+    width: 28px; height: 28px;
+    background: rgba(24,176,230,0.15);
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    display: grid; place-items: center;
+    border-radius: 4px;
+    transform: rotate(15deg);
+  }
+  .sled-card .flow .step .n span { transform: rotate(-15deg); display: block; }
+  .sled-card .flow .step .t {
+    color: rgba(255,255,255,0.88);
+    font-size: 14.5px;
+    font-weight: 500;
+  }
+  .sled-card .flow .step .t em { color: var(--cyan); font-style: normal; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-left: 8px; opacity: 0.75; }
+
+  /* Industries */
+  .industries {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px;
+  }
+  .ind {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 20px;
+    aspect-ratio: 1 / 1.1;
+    display: flex; flex-direction: column;
+    transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .ind:hover {
+    transform: translateY(-3px);
+    background: var(--yale);
+    color: var(--white);
+    border-color: var(--yale);
+  }
+  .ind:hover h4 { color: var(--white); }
+  .ind:hover .num { color: var(--cyan); }
+  .ind .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: auto;
+  }
+  .ind h4 {
+    font-size: 18px; line-height: 1.15;
+    margin-bottom: 10px;
+    color: var(--yale);
+    transition: color 220ms ease;
+  }
+  .ind p { font-size: 12px; color: var(--muted); transition: color 220ms ease; opacity: 0.0; }
+  .ind:hover p { color: rgba(255,255,255,0.7); opacity: 1; }
+  .ind .arr {
+    position: absolute; right: 16px; bottom: 16px;
+    color: var(--cyan);
+    transform: translateX(-4px); opacity: 0;
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+  .ind:hover .arr { transform: translateX(0); opacity: 1; }
+  .ind .tsq-bg { position: absolute; left: -10px; top: 50%; width: 20px; height: 20px; background: var(--cyan); opacity: 0.0; transition: opacity 220ms ease; }
+  .ind:hover .tsq-bg { opacity: 0.5; }
+
+  /* Final CTA */
+  .final {
+    text-align: center;
+    padding: 120px 0;
+    background: var(--seasalt);
+  }
+  .final .eyebrow { margin-bottom: 14px; display: block; }
+  .final h2 {
+    font-size: 56px; line-height: 1.05;
+    max-width: 800px; margin: 0 auto 22px;
+  }
+  .final p {
+    font-size: 18px; color: var(--muted);
+    max-width: 600px; margin: 0 auto 36px;
+  }
+  .final .row { display: inline-flex; gap: 14px; align-items: center; }
+  .final .cta { padding: 14px 24px; font-size: 15px; }
+  .final .calendly {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Footer */
+  footer.foot {
+    background: var(--yale-dark);
+    color: rgba(255,255,255,0.7);
+    padding: 80px 0 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer.foot::before {
+    content: ""; position: absolute; left: -40px; bottom: -40px;
+    width: 240px; height: 240px;
+    background:
+      linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%);
+    background-size: 30px 30px;
+    transform: rotate(15deg);
+    opacity: 0.6;
+  }
+  footer.foot .cols {
+    display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+  footer.foot .brand .logo { color: var(--white); margin-bottom: 16px; }
+  footer.foot .brand p { font-size: 14px; line-height: 1.55; max-width: 280px; margin-bottom: 20px; }
+  footer.foot .brand .socials { display: flex; gap: 10px; }
+  footer.foot .brand .socials a {
+    width: 34px; height: 34px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 6px;
+    display: grid; place-items: center;
+    color: rgba(255,255,255,0.7);
+    transition: color 180ms ease, border-color 180ms ease;
+  }
+  footer.foot .brand .socials a:hover { color: var(--cyan); border-color: var(--cyan); }
+  footer.foot h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+  footer.foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer.foot ul a { font-size: 14px; color: rgba(255,255,255,0.78); transition: color 180ms ease; }
+  footer.foot ul a:hover { color: var(--cyan); }
+  footer.foot .strip {
+    border-top: 1px solid rgba(255,255,255,0.10);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    position: relative;
+  }
+  footer.foot .strip .legal { display: flex; gap: 24px; }
+  footer.foot .strip .legal a:hover { color: var(--cyan); }
+
+  /* Tweaks panel */
+  #tweaks { position: fixed; bottom: 18px; right: 18px; z-index: 999; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap nav">
+    <a href="#" class="logo">
+      <span class="glyph" aria-hidden="true"></span>
+      <span>Techtiz</span>
+    </a>
+    <nav class="menu" aria-label="Primary">
+      <a href="#">Solutions <span class="chev"></span></a>
+      <a href="#">Industries <span class="chev"></span></a>
+      <a href="#">U.S. SLED <span class="chev"></span></a>
+      <a href="#">Insights</a>
+      <a href="#">Company <span class="chev"></span></a>
+      <a href="#" class="cta">Talk to us <span class="arr"></span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap" style="position:relative;">
+    <div class="hero-corner" aria-hidden="true">
+      <span class="tsq s1"></span>
+      <span class="tsq s2"></span>
+      <span class="tsq s3"></span>
+      <span class="tsq s4"></span>
+      <span class="tsq s5"></span>
+      <span class="tsq s6"></span>
+    </div>
+    <div class="hero-head">
+      <span class="eyebrow">Two tracks · One operating principle</span>
+      <h1 style="margin-top:18px;">Build the systems that <span class="accent">move your business</span> forward.</h1>
+      <p class="sub">AI automation, custom software, and U.S. SLED technology partnerships. Pick the path that fits where you are; we run both with the same engineering discipline.</p>
+    </div>
+
+    <div class="router" role="navigation" aria-label="Dual track router">
+      <a class="panel light" href="#">
+        <span class="num">Track A · /solutions</span>
+        <h2>I'm building a business.</h2>
+        <p class="desc">AI automation, custom software, low-code, and digital transformation for founders, CTOs, and operators.</p>
+        <div class="triplet">
+          <span>Automate</span><span>Build</span><span>Scale</span>
+        </div>
+        <span class="go">Explore solutions <span class="arr"></span></span>
+      </a>
+
+      <a class="panel dark" href="#">
+        <div class="pattern" aria-hidden="true">
+          <span class="tsq p1"></span>
+          <span class="tsq p2"></span>
+          <span class="tsq p3"></span>
+          <span class="tsq p4"></span>
+          <span class="tsq p5"></span>
+        </div>
+        <span class="num">Track B · /us-sled</span>
+        <h2>I'm bidding on a U.S. SLED RFP.</h2>
+        <p class="desc">Technology subcontractor to U.S. primes. GIS, statutory document production, grant reporting, RFP decode.</p>
+        <div class="triplet">
+          <span>Decode</span><span>Build</span><span>Deliver</span>
+        </div>
+        <span class="go">See SLED practice <span class="arr"></span></span>
+        <span class="corner-tag">New practice · 2026</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO WALL -->
+<div class="logo-wall">
+  <div class="wrap">
+    <div class="row">
+      <div class="label">Trusted by</div>
+      <div class="client"><span class="dot"></span> LinkedGolf</div>
+      <div class="client alt"><span class="dot"></span> Dashboard.Earth</div>
+      <div class="client"><span class="dot"></span> Capsule Lab</div>
+      <div class="client alt"><span class="dot"></span> Northstar Health</div>
+      <div class="client"><span class="dot"></span> Meridian Logix</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE DO -->
+<section class="block">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="left">
+        <span class="eyebrow">What we do</span>
+        <h2>Three capabilities, one operating model.</h2>
+      </div>
+      <div class="right">Engineers, designers, and grants specialists working as one team. Production-grade or it doesn't ship.</div>
+    </div>
+    <div class="cap-grid">
+      <div class="cap">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>AI automation</h3>
+        <p>Sales, customer service, marketing, CRM, lead-gen, SEO, and scheduling workflows that run themselves and don't break when the CRM does.</p>
+        <a href="#" class="more">Explore AI automation</a>
+      </div>
+      <div class="cap">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Custom software</h3>
+        <p>Web, mobile, and low-code platforms built for measurable outcomes. Vibe-code prototypes through production deployments.</p>
+        <a href="#" class="more">Explore development</a>
+      </div>
+      <div class="cap">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3>Digital transformation</h3>
+        <p>Modernize legacy stacks, instrument workflows, unify data, and roll out change management that the org actually adopts.</p>
+        <a href="#" class="more">Explore transformation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<div class="proof">
+  <div class="wrap proof-inner">
+    <div class="head">
+      <span class="eyebrow">By the numbers</span>
+      <h3>Five years of production-grade work.</h3>
+    </div>
+    <div class="stat"><div class="n">5+</div><div class="l">Years experience</div></div>
+    <div class="stat"><div class="n">98%</div><div class="l">Client satisfaction</div></div>
+    <div class="stat"><div class="n">180+</div><div class="l">Projects completed</div></div>
+    <div class="stat"><div class="n">200+</div><div class="l">Clients served</div></div>
+  </div>
+</div>
+
+<!-- FEATURED CASE STUDIES -->
+<section class="block">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="left">
+        <span class="eyebrow">Featured work</span>
+        <h2>Three projects that show the range.</h2>
+      </div>
+      <div class="right"><a href="#" style="color:var(--yale); font-weight:700;">All case studies →</a></div>
+    </div>
+    <div class="cases">
+      <a class="case t1" href="#">
+        <div class="thumb">
+          <span class="stamp">Delivered · 2025</span>
+          <div class="glyph">
+            <span class="tsq a"></span>
+            <span class="tsq b"></span>
+            <span class="tsq c"></span>
+          </div>
+          <span class="label">[ product shot · linkedgolf ]</span>
+        </div>
+        <div class="body">
+          <div class="meta">SaaS · sports tech</div>
+          <h3>Tournament platform rebuilt around a sub-200ms scoring engine.</h3>
+          <p>Custom React/Node stack replaced a 5-year-old WordPress build; tournament throughput up 3.4x with zero downtime cutover.</p>
+          <span class="more">Read the case study</span>
+        </div>
+      </a>
+      <a class="case t2" href="#">
+        <div class="thumb">
+          <span class="stamp">Delivered · 2025</span>
+          <div class="glyph">
+            <span class="tsq a"></span>
+            <span class="tsq b"></span>
+            <span class="tsq c"></span>
+          </div>
+          <span class="label">[ dashboard screenshot · earth.io ]</span>
+        </div>
+        <div class="body">
+          <div class="meta">Climate · data viz</div>
+          <h3>Carbon dashboard pulling 14 data sources into one decision layer.</h3>
+          <p>Built the ETL pipeline, role-based access, and policy-export module. Adopted by 9 enterprise customers in the first quarter.</p>
+          <span class="more">Read the case study</span>
+        </div>
+      </a>
+      <a class="case t3" href="#">
+        <div class="thumb">
+          <span class="stamp">Decoded · 2026</span>
+          <div class="glyph">
+            <span class="tsq a"></span>
+            <span class="tsq b"></span>
+            <span class="tsq c"></span>
+          </div>
+          <span class="label">[ rfp 2026-08 · materials mgmt plan ]</span>
+        </div>
+        <div class="body">
+          <div class="meta">SLED · Michigan · MMP</div>
+          <h3>Bay County RFP decoded: why fee-priced bids lose this evaluation.</h3>
+          <p>5-day strategic decode surfaced a 25% experience-weight pattern across six Michigan MMP awards. Read by 4 prime capture teams.</p>
+          <span class="more">Read the decode</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SLED CALLOUT (with subtle Capitol image bg) -->
+<section class="sled-band" id="sled">
+  <div class="capitol" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="tsq-cluster" aria-hidden="true">
+    <span class="tsq k1"></span>
+    <span class="tsq k2"></span>
+    <span class="tsq k3"></span>
+    <span class="tsq k4"></span>
+    <span class="tsq k5"></span>
+    <span class="tsq k6 outline"></span>
+    <span class="tsq k7 outline"></span>
+  </div>
+  <div class="wrap">
+    <div class="inner">
+      <div class="lead">
+        <span class="new-pill"><span class="tsq"></span> New · U.S. SLED practice</span>
+        <h2>Decode the RFP. <span class="accent">Build the backbone.</span> Ship on the statutory deadline.</h2>
+        <p class="body">Techtiz is the technology subcontractor U.S. primes bring in when an RFP demands custom GIS, statutory document production, or grant reporting that no off-the-shelf product covers. We work under your master agreement. We don't bid as prime.</p>
+
+        <div class="cta-row">
+          <a href="#" class="cta">See the RFPs we've decoded <span class="arr"></span></a>
+          <a href="#" class="cta-secondary">Talk to us about a bid</a>
+        </div>
+
+        <div class="trust">
+          <div class="item"><div class="l">Federal NAICS</div><div class="v">541511 · 541512</div></div>
+          <div class="item"><div class="l">State NIGP</div><div class="v">918-46 · 918-00</div></div>
+          <div class="item"><div class="l">SAM.gov UEI</div><div class="v">In registration</div></div>
+          <div class="item"><div class="l">Decode SLA</div><div class="v">5 business days</div></div>
+          <div class="item"><div class="l">Insurance</div><div class="v">Prime-routed</div></div>
+          <div class="item"><div class="l">SOC 2</div><div class="v">Type II in progress</div></div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="sled-card">
+          <div class="label">The engagement model</div>
+          <h3>Six steps from RFP release to statutory adoption.</h3>
+          <div class="flow">
+            <div class="step"><div class="n"><span>01</span></div><div class="t">RFP release <em>day 0</em></div></div>
+            <div class="step"><div class="n"><span>02</span></div><div class="t">Prime contacts Techtiz</div></div>
+            <div class="step"><div class="n"><span>03</span></div><div class="t">Decode analysis <em>5 days</em></div></div>
+            <div class="step"><div class="n"><span>04</span></div><div class="t">Scope agreement</div></div>
+            <div class="step"><div class="n"><span>05</span></div><div class="t">Build phase</div></div>
+            <div class="step"><div class="n"><span>06</span></div><div class="t">Statutory submission</div></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="block">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="left">
+        <span class="eyebrow">Industries</span>
+        <h2>Where we work most often.</h2>
+      </div>
+      <div class="right"><a href="#" style="color:var(--yale); font-weight:700;">All industries →</a></div>
+    </div>
+    <div class="industries">
+      <a class="ind" href="#"><span class="tsq-bg"></span><span class="num">01</span><h4>Healthcare</h4><p>HIPAA-compliant patient platforms</p><span class="arr">→</span></a>
+      <a class="ind" href="#"><span class="tsq-bg"></span><span class="num">02</span><h4>Digital marketing</h4><p>Attribution and lifecycle automation</p><span class="arr">→</span></a>
+      <a class="ind" href="#"><span class="tsq-bg"></span><span class="num">03</span><h4>E-commerce</h4><p>Headless commerce and ops</p><span class="arr">→</span></a>
+      <a class="ind" href="#"><span class="tsq-bg"></span><span class="num">04</span><h4>Real estate</h4><p>Listing engines and CRM stacks</p><span class="arr">→</span></a>
+      <a class="ind" href="#"><span class="tsq-bg"></span><span class="num">05</span><h4>Logistics</h4><p>Routing, dispatch, and visibility</p><span class="arr">→</span></a>
+      <a class="ind" href="#"><span class="tsq-bg"></span><span class="num">06</span><h4>Education</h4><p>LMS and student-data platforms</p><span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <span class="eyebrow">Ready when you are</span>
+    <h2>Book a 30-minute consultation.</h2>
+    <p>Bring the problem. We'll bring the engineering. No slide deck required.</p>
+    <div class="row">
+      <a href="#" class="cta">Schedule a call <span class="arr"></span></a>
+      <span class="calendly">Or email mohsin@techtiz.co</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand">
+        <a href="#" class="logo"><span class="glyph"></span><span>Techtiz</span></a>
+        <p>AI automation, custom software, and U.S. SLED technology partnerships. Built for outcomes, instrumented for audit.</p>
+        <div class="socials">
+          <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.6 18.3v-7.6H6.07v7.6H8.6m-1.27-8.67a1.45 1.45 0 0 0 1.45-1.45A1.45 1.45 0 0 0 7.33 6.7a1.46 1.46 0 0 0-1.46 1.46 1.46 1.46 0 0 0 1.46 1.45m11 8.67v-4.18c0-2.2-1.18-3.22-2.76-3.22a2.38 2.38 0 0 0-2.16 1.19v-1.02h-2.45v7.6h2.53v-4.22c0-1.12.43-1.78 1.39-1.78s1.4.62 1.4 1.78v4.22h2.55z"/></svg></a>
+          <a href="#" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2H21l-6.5 7.4L22 22h-6.6l-5.2-6.8L4.2 22H1.5l7-8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.2 4H5.3l11.7 16z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21.95v-7.78H16l.37-2.9H13.5V9.41c0-.84.23-1.41 1.43-1.41h1.53V5.4a20 20 0 0 0-2.23-.11c-2.2 0-3.7 1.34-3.7 3.8v2.18H8V14h2.53v7.95h2.97z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="#">AI automation</a></li>
+          <li><a href="#">AI &amp; intelligence</a></li>
+          <li><a href="#">Development</a></li>
+          <li><a href="#">Digital transformation</a></li>
+          <li><a href="#">UX design</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>U.S. SLED</h5>
+        <ul>
+          <li><a href="#">Capabilities</a></li>
+          <li><a href="#">Case studies</a></li>
+          <li><a href="#">RFP types</a></li>
+          <li><a href="#">For primes</a></li>
+          <li><a href="#">SLED contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Industries</h5>
+        <ul>
+          <li><a href="#">Healthcare</a></li>
+          <li><a href="#">Digital marketing</a></li>
+          <li><a href="#">E-commerce</a></li>
+          <li><a href="#">Real estate</a></li>
+          <li><a href="#">Logistics</a></li>
+          <li><a href="#">Education</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="strip">
+      <div>© 2026 Techtiz · Lahore HQ · U.S. office</div>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Tweaks panel -->
+<div id="tweaks"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks.jsx"></script>
+</body>
+</html>

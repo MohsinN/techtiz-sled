@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1320" />
+<title>SLED Capabilities | The Techtiz SLED Backbone | Techtiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="_shared.css" />
+<style>
+/* ===== Capabilities page-specific ===== */
+
+.page-hero {
+  background: var(--seasalt);
+  padding: 80px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: ""; position: absolute; right: -40px; top: -40px;
+  width: 260px; height: 260px;
+  background: linear-gradient(45deg, transparent 49%, rgba(24,176,230,0.10) 49% 51%, transparent 51%);
+  background-size: 28px 28px;
+  transform: rotate(15deg);
+}
+.page-hero .lead { max-width: 740px; position: relative; z-index: 2; }
+.page-hero .lead .eyebrow { margin-bottom: 18px; display: inline-block; }
+.page-hero h1 { font-size: 56px; line-height: 1.05; margin-bottom: 22px; }
+.page-hero h1 .accent { color: var(--cyan); }
+.page-hero .body { font-size: 17px; color: var(--muted); line-height: 1.55; max-width: 600px; }
+
+/* Procurement trust strip — denser version */
+.proc-strip {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 40px 0;
+}
+.proc-strip .h {
+  text-align: center;
+  margin-bottom: 26px;
+}
+.proc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.proc-item {
+  border-left: 1px solid var(--line);
+  padding: 8px 22px;
+}
+.proc-item:first-child { border-left: 0; padding-left: 0; }
+.proc-item .pi-icon {
+  width: 28px; height: 28px;
+  color: var(--cyan-strong);
+  margin-bottom: 12px;
+}
+.proc-item .pi-l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.proc-item .pi-v {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--yale);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.proc-item .pi-c {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Capability matrix table */
+.matrix-section { padding: 100px 0 80px; }
+.matrix-section .head { margin-bottom: 48px; max-width: 720px; }
+.matrix-section .head .eyebrow { margin-bottom: 14px; display: inline-block; }
+.matrix-section .head h2 { font-size: 40px; line-height: 1.1; }
+.matrix-section .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 620px; }
+
+.matrix-table {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.matrix-row {
+  display: grid;
+  grid-template-columns: 280px 1.4fr 1fr;
+  border-top: 1px solid var(--line);
+  align-items: stretch;
+}
+.matrix-row:first-child {
+  border-top: 0;
+  background: var(--yale);
+  color: var(--white);
+}
+.matrix-row .cell {
+  padding: 22px 26px;
+  font-size: 14px;
+  line-height: 1.55;
+  border-left: 1px solid var(--line);
+}
+.matrix-row .cell:first-child { border-left: 0; }
+.matrix-row:first-child .cell {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+  border-color: rgba(255,255,255,0.10);
+  padding: 18px 26px;
+}
+.matrix-row .cap-name {
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.matrix-row .cap-name .ico {
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  background: var(--cyan-soft);
+  color: var(--cyan-strong);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.matrix-row .cap-name .ico svg { width: 18px; height: 18px; }
+.matrix-row .cap-name .nm {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--yale);
+  line-height: 1.3;
+}
+.matrix-row .what {
+  color: var(--ink);
+}
+.matrix-row .tools {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--cyan-strong);
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+}
+
+.matrix-row:hover:not(:first-child) {
+  background: var(--seasalt);
+}
+
+/* Stack quadrants */
+.stack-section {
+  background: var(--seasalt);
+  padding: 100px 0;
+  border-top: 1px solid var(--line);
+}
+.stack-section .head { margin-bottom: 48px; }
+.stack-section .head .eyebrow { margin-bottom: 14px; display: inline-block; }
+.stack-section .head h2 { font-size: 40px; }
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stack-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 32px 30px;
+}
+.stack-card h3 {
+  font-size: 17px;
+  color: var(--yale);
+  margin-bottom: 6px;
+}
+.stack-card .sub-l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan-strong);
+  margin-bottom: 20px;
+}
+.stack-card .tools {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.stack-card .tools .t {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--yale);
+  background: var(--seasalt);
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+/* What we don't do */
+.boundaries {
+  padding: 100px 0;
+  background: var(--white);
+}
+.boundaries .head { margin-bottom: 40px; max-width: 720px; }
+.boundaries .head .eyebrow { margin-bottom: 14px; display: inline-block; color: var(--amber); }
+.boundaries .head h2 { font-size: 40px; }
+.boundaries .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 620px; }
+.boundaries .list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.boundary {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 26px 28px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.boundary .x {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(216,144,23,0.10);
+  color: var(--amber);
+  display: grid; place-items: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+.boundary h4 {
+  font-size: 16px;
+  color: var(--yale);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.boundary p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Final CTA */
+.final {
+  background: var(--yale-dark);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.final::before {
+  content: ""; position: absolute; right: -60px; top: -60px;
+  width: 320px; height: 320px;
+  background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%);
+  background-size: 30px 30px;
+  transform: rotate(15deg);
+}
+.final-inner { padding: 90px 0; text-align: center; position: relative; z-index: 2; }
+.final .eyebrow { color: var(--cyan); margin-bottom: 14px; display: inline-block; }
+.final h2 { color: var(--white); font-size: 38px; margin-bottom: 28px; max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.15; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap nav">
+    <a href="../Homepage.html" class="brand-mark" aria-label="Techtiz home"><img src="../assets/logo.svg" alt="Techtiz" class="brand-logo" /></a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="../Homepage.html" class="nav-link">About Us</a>
+      <div class="nav-item" data-mega="services">
+        <button class="nav-link" type="button" aria-expanded="false">Services <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">We Offer</div>
+              <div class="mega-list" data-list="services">
+                <a class="mega-item active" data-key="development" href="#">Development <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ai" href="#">AI &amp; Intelligence <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="automation" href="#">Automation &amp; AI Solutions <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="transformation" href="#">Digital Transformation <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ux" href="#">UX Design / Enablement <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="services">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div>
+                <div><h4 data-feat-title>Development</h4><p data-feat-desc>Build robust, scalable digital products designed to grow with your business.</p></div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="services">
+                <a href="#">Custom Software</a><a href="#">Mobile Apps</a><a href="#">Low code / No-code Dev</a><a href="#">Vibe code Dev</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">U.S. Prime contractor?</span>
+                <a class="mega-cta" href="index.html">See U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item" data-mega="industries">
+        <button class="nav-link" type="button" aria-expanded="false">Industries <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">Industries</div>
+              <div class="mega-list" data-list="industries">
+                <a class="mega-item active" data-key="healthcare" href="#">Healthcare <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="marketing" href="#">Digital Marketing <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="realestate" href="#">Real Estate <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ecommerce" href="#">E-commerce <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="logistics" href="#">Logistics &amp; Supply Chain <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="education" href="#">Education <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="industries">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                <div><h4 data-feat-title>Healthcare</h4><p data-feat-desc>Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p></div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="industries">
+                <a href="#">AI Appointment Management</a><a href="#">AI-Powered Communication</a><a href="#">Reporting Optimization</a><a href="#">Patient Records</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">State, county, local agencies?</span>
+                <a class="mega-cta" href="index.html">U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="case-studies.html" class="nav-link">Case Studies</a>
+      <a href="#" class="nav-link">Careers</a>
+    </nav>
+    <div class="right-cta">
+      <a href="index.html" class="us-pill" aria-current="page"><span class="sled-dot"></span> U.S. Public Sector</a>
+    </div>
+  </div>
+</header>
+
+<!-- SUB-NAV -->
+<div class="subnav">
+  <div class="wrap subnav-inner">
+    <div class="crumbs">
+      <a href="../Homepage.html">Techtiz</a>
+      <span class="sep">/</span>
+      <a href="index.html">U.S. Public Sector</a>
+      <span class="sep">/</span>
+      <span class="here">Capabilities</span>
+    </div>
+    <div class="sub-links">
+      <a href="index.html">Hub</a>
+      <a href="index.html#two-stages">For Primes</a>
+      <a href="index.html#onshore">Delivery</a>
+      <a href="index.html#vehicles">Vehicles</a>
+      <a href="capabilities.html" class="on">Capabilities</a>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow"><span class="gl"></span> Capabilities of the Techtiz SLED Backbone</span>
+      <h1>What we <span class="accent">bring on day one.</span></h1>
+      <p class="body">A reference page a prime can scan in two minutes to confirm Techtiz can plug into the bid stack.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCUREMENT STRIP -->
+<section class="proc-strip">
+  <div class="wrap">
+    <div class="h">
+      <span class="eyebrow">Procurement &amp; registration</span>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-item">
+        <svg class="pi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4 V2 M17 4 V2 M3 10 h18"/></svg>
+        <div class="pi-l">NAICS Codes</div>
+        <div class="pi-v">541511 · 541512</div>
+        <div class="pi-c">Custom Computer Programming · Computer Systems Design</div>
+      </div>
+      <div class="proc-item">
+        <svg class="pi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21 h18"/><path d="M6 21 V8 l6 -4 l6 4 v13"/><path d="M9 12 h6 M9 16 h6"/></svg>
+        <div class="pi-l">NIGP Codes</div>
+        <div class="pi-v">918-46 · 918-00</div>
+        <div class="pi-c">Software Development · Technology</div>
+      </div>
+      <div class="proc-item">
+        <svg class="pi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"/></svg>
+        <div class="pi-l">Insurance</div>
+        <div class="pi-v">Per engagement</div>
+        <div class="pi-c">Routed through prime master agreement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITY MATRIX -->
+<section class="matrix-section">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Capability matrix</span>
+      <h2>Eight rows. One per Backbone component.</h2>
+      <p>Mapped by depth, not breadth. Each row is something we've shipped on a real engagement.</p>
+    </div>
+
+    <div class="matrix-table">
+      <div class="matrix-row">
+        <div class="cell">Capability</div>
+        <div class="cell">What we do</div>
+        <div class="cell">Tools we use</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"/></svg></div>
+          <div class="nm">Regulatory &amp; Statutory Compliance</div>
+        </div>
+        <div class="cell what">Plan-content checklists, statute-citation validation, adoption-sequence tracking against state framework guidance.</div>
+        <div class="cell tools">Custom rule engines · Statutory framework libraries · EGLE guidance maps</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10 c0 7 -9 13 -9 13 s-9 -6 -9 -13 a9 9 0 0 1 18 0 z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="nm">GIS &amp; Data Pipelines</div>
+        </div>
+        <div class="cell what">Facility inventories, forecast models, supply chain analysis, parcel data, multi-source spatial joins.</div>
+        <div class="cell tools">ArcGIS · PostGIS · GeoPandas · Mapbox · Leaflet</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21 v-2 a4 4 0 0 0 -4 -4 H5 a4 4 0 0 0 -4 4 v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="nm">Public Engagement Technology</div>
+        </div>
+        <div class="cell what">Multilingual surveys, comment capture, disadvantaged-community reach, hearing presentation packs.</div>
+        <div class="cell tools">Custom survey platforms · Accessibility tooling · i18n stacks · Plain-language pipelines</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="nm">Grant Reporting Automation</div>
+        </div>
+        <div class="cell what">Quarterly milestone reports auto-generated, reconciliation against delivery data, federal-state report alignment.</div>
+        <div class="cell tools">Make.com · n8n · Custom reporting pipelines · Workday Adaptive</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15 v4 a2 2 0 0 1 -2 2 H5 a2 2 0 0 1 -2 -2 v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          <div class="nm">Document Production &amp; Format Compliance</div>
+        </div>
+        <div class="cell what">Statutory-format compliant deliverables in PDF, InDesign, ArcGIS, Word, Excel. PDF/UA accessibility built in.</div>
+        <div class="cell tools">Adobe Creative Suite · Microsoft Office · PDF/UA tooling · LaTeX</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12 h20 M12 2 a15 15 0 0 1 0 20"/></svg></div>
+          <div class="nm">Accessibility &amp; Equity</div>
+        </div>
+        <div class="cell what">WCAG 2.2 AA validation, multilingual content, disadvantaged-community engagement, plain-language editing.</div>
+        <div class="cell tools">axe DevTools · Screen-reader testing (NVDA, VoiceOver) · Plain-language style guides</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7 v5 l3 2"/></svg></div>
+          <div class="nm">Adoption Sequence Tracking</div>
+        </div>
+        <div class="cell what">Statutory comment periods, public hearings, board adoption, EGLE submission, deadline alerting.</div>
+        <div class="cell tools">Project management instrumentation · Notion · Linear · Custom deadline alerting</div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="cell cap-name">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V8 z"/><path d="M14 2 v6 h6"/></svg></div>
+          <div class="nm">Audit Trail &amp; Records Management</div>
+        </div>
+        <div class="cell what">Every delivery action timestamped, attributable, exportable for FOIA and state public-records requests.</div>
+        <div class="cell tools">Custom audit logging · Structured records export · S3 immutable storage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK QUADRANTS -->
+<section class="stack-section">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Tech stack</span>
+      <h2>Four quadrants of working tools.</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <h3>GIS</h3>
+        <div class="sub-l">Spatial &amp; data</div>
+        <div class="tools">
+          <span class="t">ArcGIS Pro</span>
+          <span class="t">ArcGIS Online</span>
+          <span class="t">PostGIS</span>
+          <span class="t">GeoPandas</span>
+          <span class="t">Mapbox</span>
+          <span class="t">Leaflet</span>
+          <span class="t">QGIS</span>
+          <span class="t">Turf.js</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>Engagement &amp; Automation</h3>
+        <div class="sub-l">Public-facing workflows</div>
+        <div class="tools">
+          <span class="t">Make.com</span>
+          <span class="t">n8n</span>
+          <span class="t">Zapier</span>
+          <span class="t">Custom survey platforms</span>
+          <span class="t">SurveyMonkey API</span>
+          <span class="t">Twilio</span>
+          <span class="t">SendGrid</span>
+          <span class="t">i18next</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>Docs &amp; Publishing</h3>
+        <div class="sub-l">Statutory-format deliverables</div>
+        <div class="tools">
+          <span class="t">Adobe InDesign</span>
+          <span class="t">Adobe Acrobat Pro</span>
+          <span class="t">Microsoft Office</span>
+          <span class="t">PDF/UA</span>
+          <span class="t">LaTeX</span>
+          <span class="t">Pandoc</span>
+          <span class="t">Word XML</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>Data &amp; Reporting</h3>
+        <div class="sub-l">Audit, grant, compliance</div>
+        <div class="tools">
+          <span class="t">PostgreSQL</span>
+          <span class="t">Supabase</span>
+          <span class="t">Metabase</span>
+          <span class="t">DuckDB</span>
+          <span class="t">dbt</span>
+          <span class="t">Airbyte</span>
+          <span class="t">Workday Adaptive</span>
+          <span class="t">S3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DON'T DO -->
+<section class="boundaries">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" style="color:var(--amber);">What we don't do</span>
+      <h2>Honest about the lane.</h2>
+      <p>Trust comes from knowing where the work ends. These five categories belong to the prime, to a specialist sub, or to nobody at all.</p>
+    </div>
+    <div class="list">
+      <div class="boundary">
+        <div class="x">✕</div>
+        <div>
+          <h4>Fieldwork</h4>
+          <p>Site visits, in-person stakeholder facilitation, on-site meeting moderation. We support remotely; the prime owns the physical room.</p>
+        </div>
+      </div>
+      <div class="boundary">
+        <div class="x">✕</div>
+        <div>
+          <h4>Legal drafting</h4>
+          <p>Legal counsel for statutory interpretation must come from the prime or a separate sub. We follow the legal opinion; we don't issue it.</p>
+        </div>
+      </div>
+      <div class="boundary">
+        <div class="x">✕</div>
+        <div>
+          <h4>Prime contractor role</h4>
+          <p>We don't bid against our partners. Subcontract-only. Direct-to-agency engagements are out of scope.</p>
+        </div>
+      </div>
+      <div class="boundary">
+        <div class="x">✕</div>
+        <div>
+          <h4>Direct-to-agency engagements</h4>
+          <p>Every engagement routes through a U.S. prime under a master subcontract. NDAs and IP through prime templates.</p>
+        </div>
+      </div>
+      <div class="boundary" style="grid-column: span 2;">
+        <div class="x">✕</div>
+        <div>
+          <h4>Off-the-shelf product replacement</h4>
+          <p>We don't compete with Tyler, Granicus, CivicPlus, OpenGov, GovPilot or other GovTech product companies. When a prime needs a product, we recommend the right one. We're the subcontractor that ships the custom piece the off-the-shelf platform doesn't cover.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap final-inner">
+    <span class="eyebrow">A specific RFP in mind?</span>
+    <h2>Send us the SOW. Get a decode in 5 business days.</h2>
+    <a href="contact.html" class="cta">Discuss a specific RFP <span class="arr"></span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand-foot">
+        <a href="../Homepage.html" class="brand-mark"><img src="../assets/logo-light.svg" alt="Techtiz" class="brand-logo" /></a>
+        <p>An AI-native engineering studio building adaptive systems for ambitious teams.</p>
+      </div>
+      <div>
+        <h5>U.S. Public Sector</h5>
+        <ul>
+          <li><a href="index.html">SLED Hub</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="index.html#two-stages">For Primes</a></li>
+          <li><a href="index.html#vehicles">Vehicles</a></li>
+          <li><a href="contact.html">SLED Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>International</h5>
+        <ul>
+          <li><a href="../Homepage.html">Home</a></li>
+          <li><a href="#">Solutions</a></li>
+          <li><a href="#">Industries</a></li>
+          <li><a href="#">Case Studies</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Insights</h5>
+        <ul><li><a href="#">Articles</a></li><li><a href="#">Playbooks</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="strip">
+      <div>© 2026 Techtiz · Lahore HQ · U.S. office</div>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="_nav.js"></script>
+</body>
+</html>
