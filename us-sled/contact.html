@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=1320" />
-<title>Send us an RFP | U.S. SLED Intake | Techtiz</title>
+<title>Talk to us about a subcontract role | U.S. SLED Intake | Techtiz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -434,11 +434,11 @@
     </div>
     <div class="sub-links">
       <a href="index.html">Hub</a>
-      <a href="index.html#two-stages">For Primes</a>
+      <a href="index.html#two-stages">Engagement Modes</a>
       <a href="index.html#onshore">Delivery</a>
-      <a href="index.html#vehicles">Vehicles</a>
+      <a href="how-we-engage.html">How We Engage</a>
       <a href="capabilities.html">Capabilities</a>
-      <a href="case-studies.html">Case Studies</a>
+      <a href="case-studies.html">Engagement Examples</a>
       <a href="contact.html" class="on">Contact</a>
     </div>
   </div>
@@ -449,9 +449,9 @@
   <div class="wrap sla-inner">
     <span class="lbl">Our commitment to primes</span>
     <span class="item"><span class="tsq"></span> Reply within 1 business day</span>
-    <span class="item"><span class="tsq"></span> No-cost initial assessment in 5</span>
-    <span class="item"><span class="tsq"></span> NDA-first conversations</span>
+    <span class="item"><span class="tsq"></span> NDA on first substantive contact</span>
     <span class="item"><span class="tsq"></span> Subcontract under your terms</span>
+    <span class="item"><span class="tsq"></span> Zero agency-facing engagements</span>
   </div>
 </section>
 
@@ -464,8 +464,8 @@
       <div>
         <div class="lead">
           <span class="eyebrow"><span class="gl"></span> SLED intake</span>
-          <h1>Send us an <span class="accent">RFP.</span></h1>
-          <p class="desc">Capture managers, BD leads, and program managers at U.S. primes only. We respond within one business day with a triage path and a calendar invite if a working session makes sense.</p>
+          <h1>Talk to us about a <span class="accent">subcontract role.</span></h1>
+          <p class="desc">Capture managers, BD leads, and program managers at U.S. primes only. We reply within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials are exchanged before the NDA is signed.</p>
         </div>
 
         <form class="intake-form" onsubmit="event.preventDefault(); alert('Thanks. We\\'ll be in touch within 1 business day.');">
@@ -503,49 +503,36 @@
 
           <div class="section-divider"></div>
           <div class="section-l">Section 02</div>
-          <div class="section-h">About the RFP</div>
+          <div class="section-h">About the engagement</div>
 
           <div class="field-row">
             <div class="field">
-              <label for="rfp">RFP number <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
-              <input id="rfp" name="rfp" type="text" placeholder="e.g. RFP 2026-08" />
-            </div>
-            <div class="field">
-              <label for="state">State</label>
-              <select id="state" name="state">
-                <option>Select a state</option>
-                <option>Michigan</option>
-                <option>Oregon</option>
-                <option>Colorado</option>
-                <option>Texas</option>
-                <option>New Mexico</option>
+              <label for="vehicle">Contract vehicle <span style="color:var(--muted);font-weight:500;">(if known)</span></label>
+              <select id="vehicle" name="vehicle">
+                <option>Not yet determined</option>
+                <option>NASPO ValuePoint</option>
+                <option>GSA MAS / IT-70</option>
+                <option>State Master Agreement</option>
+                <option>Direct Subcontract</option>
+                <option>Local Co-op</option>
                 <option>Other</option>
               </select>
             </div>
-          </div>
-
-          <div class="field-row">
             <div class="field">
-              <label for="due">Bid due date</label>
-              <input id="due" name="due" type="date" />
-            </div>
-            <div class="field">
-              <label for="family">RFP family</label>
-              <select id="family" name="family">
-                <option>Not sure yet</option>
-                <option>Materials Management Plans</option>
-                <option>WCAG Accessibility Builds</option>
-                <option>State Permitting Systems</option>
-                <option>Public Engagement Platforms</option>
-                <option>Grant Reporting Modernization</option>
-                <option>Other</option>
+              <label for="timing">Engagement timing</label>
+              <select id="timing" name="timing">
+                <option>Not yet determined</option>
+                <option>Active engagement — immediate</option>
+                <option>Within 30 days</option>
+                <option>Within 90 days</option>
+                <option>Pipeline / future</option>
               </select>
             </div>
           </div>
 
           <div class="field full">
             <label for="desc">Brief description</label>
-            <textarea id="desc" name="desc" placeholder="What's the SOW about? What's the scoring matrix look like? Where do you need the technology workstream covered?"></textarea>
+            <textarea id="desc" name="desc" placeholder="What's the engagement type? Subcontract under a master? Teaming letter in place or imminent? What technical surface area are you looking to staff?"></textarea>
           </div>
 
           <div class="section-divider"></div>
@@ -554,35 +541,35 @@
 
           <div class="intent-grid">
             <label class="intent-option on">
-              <input type="radio" name="intent" value="decode" checked />
+              <input type="radio" name="intent" value="post-award" checked />
               <span class="check"></span>
               <span>
-                <span class="l">RFP decode</span>
-                <span class="d">Free 5-business-day strategic analysis of evaluation criteria and statutory traps.</span>
+                <span class="l">Post-award delivery support</span>
+                <span class="d">Active engagement. Engineers, sprints, KT, integration work under your master subcontract.</span>
+              </span>
+            </label>
+            <label class="intent-option">
+              <input type="radio" name="intent" value="pre-award" />
+              <span class="check"></span>
+              <span>
+                <span class="l">Pre-award proposal support (under NDA)</span>
+                <span class="d">Teaming letter in place or imminent. Technical volume, compliance matrix, demo builds, past-performance packaging.</span>
               </span>
             </label>
             <label class="intent-option">
               <input type="radio" name="intent" value="capability" />
               <span class="check"></span>
               <span>
-                <span class="l">Capability match</span>
-                <span class="d">Confirm which Backbone components apply to a specific SOW you're considering.</span>
+                <span class="l">Capability conversation</span>
+                <span class="d">No active bid. NDA-first introduction, capability overview, future pipeline alignment.</span>
               </span>
             </label>
             <label class="intent-option">
-              <input type="radio" name="intent" value="subcontract" />
+              <input type="radio" name="intent" value="question" />
               <span class="check"></span>
               <span>
-                <span class="l">Subcontract conversation</span>
-                <span class="d">Active bid. You've decided to bring Techtiz on. NDA + subcontract paperwork.</span>
-              </span>
-            </label>
-            <label class="intent-option">
-              <input type="radio" name="intent" value="intro" />
-              <span class="check"></span>
-              <span>
-                <span class="l">General intro</span>
-                <span class="d">No active RFP. Capability overview for future pipeline.</span>
+                <span class="l">Specific question</span>
+                <span class="d">Compliance, integration, GIS, AI, or workflow question on an existing engagement.</span>
               </span>
             </label>
           </div>
@@ -604,21 +591,21 @@
               <div class="n"><span>01</span></div>
               <div class="t">
                 <em>Within 1 business day</em>
-                We confirm receipt and assign a senior engineer or capture lead to your inquiry.
+                We confirm receipt and reply with a mutual NDA template and a calendar slot for the capability conversation.
               </div>
             </div>
             <div class="step">
               <div class="n"><span>02</span></div>
               <div class="t">
-                <em>Within 5 business days</em>
-                We send a no-cost initial assessment of the RFP or capability match, scoped to your request.
+                <em>Week 1 to 2 · under NDA</em>
+                30 to 60 minute capability conversation. You describe the engagement; we describe the team shape and contracting structure.
               </div>
             </div>
             <div class="step">
               <div class="n"><span>03</span></div>
               <div class="t">
-                <em>By mutual schedule</em>
-                We schedule a working session to walk through the assessment and answer prime-specific questions.
+                <em>Week 2 to 4</em>
+                If the engagement fits, we deliver a scoped statement of work, teaming letter draft, and named-resume options for your contracts team.
               </div>
             </div>
           </div>
@@ -627,7 +614,7 @@
         <div class="direct-card">
           <div class="h">Or skip the form</div>
           <h3>Email Mohsin directly.</h3>
-          <p>If you'd rather start with a short email, send the RFP number and your role. We'll route from there.</p>
+          <p>If you'd rather start with a short email, send a one-line description of the engagement type and your role. We'll route from there.</p>
           <a class="contact-row" href="mailto:mohsin@techtiz.co">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             mohsin@techtiz.co
@@ -652,9 +639,9 @@
         <ul>
           <li><a href="index.html">SLED Hub</a></li>
           <li><a href="capabilities.html">Capabilities</a></li>
-          <li><a href="case-studies.html">Case Studies</a></li>
-          <li><a href="index.html#two-stages">For Primes</a></li>
-          <li><a href="index.html#vehicles">Vehicles</a></li>
+          <li><a href="how-we-engage.html">How We Engage</a></li>
+          <li><a href="case-studies.html">Engagement Examples</a></li>
+          <li><a href="index.html#vehicles">Procurement Vehicles</a></li>
           <li><a href="contact.html">SLED Contact</a></li>
         </ul>
       </div>

@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1320" />
+<title>How We Engage | NDA-first subcontractor engagements | Techtiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="_shared.css" />
+<style>
+.page-hero {
+  background: var(--seasalt);
+  padding: 80px 0 56px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: ""; position: absolute; right: -40px; top: -40px;
+  width: 280px; height: 280px;
+  background: linear-gradient(45deg, transparent 49%, rgba(24,176,230,0.10) 49% 51%, transparent 51%);
+  background-size: 28px 28px;
+  transform: rotate(15deg);
+}
+.page-hero .lead { max-width: 760px; position: relative; z-index: 2; }
+.page-hero .lead .eyebrow { margin-bottom: 18px; display: inline-block; }
+.page-hero h1 {
+  font-size: 56px;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+.page-hero h1 .accent { color: var(--cyan); }
+.page-hero .body {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 640px;
+}
+
+/* Sequence grid */
+.sequence {
+  padding: 100px 0 80px;
+  background: var(--white);
+}
+.sequence .head { max-width: 720px; margin-bottom: 56px; }
+.sequence .head .eyebrow { margin-bottom: 14px; display: inline-block; }
+.sequence .head h2 { font-size: 40px; line-height: 1.1; }
+.sequence .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 600px; line-height: 1.6; }
+
+.seq-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  position: relative;
+}
+.seq-step {
+  display: grid;
+  grid-template-columns: 140px 1fr 320px;
+  gap: 36px;
+  align-items: stretch;
+  background: var(--seasalt);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px 36px;
+  position: relative;
+}
+.seq-step .seq-left { display: flex; flex-direction: column; gap: 12px; }
+.seq-step .seq-num {
+  width: 56px; height: 56px;
+  border-radius: 10px;
+  background: var(--yale-dark);
+  color: var(--cyan);
+  display: grid; place-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+.seq-step .seq-when {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan-strong);
+}
+.seq-step .seq-body h3 {
+  font-size: 24px;
+  color: var(--yale-dark);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.seq-step .seq-body p {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.6;
+  max-width: 560px;
+}
+.seq-step .seq-detail {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 22px;
+  display: flex; flex-direction: column;
+  gap: 10px;
+}
+.seq-step .seq-detail .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.seq-step .seq-detail ul {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.seq-step .seq-detail ul li {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+  padding-left: 16px;
+  position: relative;
+}
+.seq-step .seq-detail ul li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 7px;
+  width: 7px; height: 7px;
+  background: var(--cyan);
+  transform: rotate(15deg);
+}
+
+/* What we don't do */
+.boundaries {
+  padding: 100px 0;
+  background: var(--seasalt);
+  border-top: 1px solid var(--line);
+}
+.boundaries .head { margin-bottom: 40px; max-width: 720px; }
+.boundaries .head .eyebrow { margin-bottom: 14px; display: inline-block; color: var(--amber); }
+.boundaries .head h2 { font-size: 40px; line-height: 1.1; }
+.boundaries .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 600px; line-height: 1.6; }
+.boundary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.b-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 26px 28px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
+}
+.b-card .x {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(216,144,23,0.10);
+  color: var(--amber);
+  display: grid; place-items: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+.b-card h4 {
+  font-size: 16px;
+  color: var(--yale);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.b-card p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Side principle band */
+.principles-band {
+  background: var(--yale-dark);
+  color: var(--white);
+  padding: 90px 0;
+  position: relative;
+  overflow: hidden;
+}
+.principles-band::before {
+  content: ""; position: absolute; right: -60px; top: -60px;
+  width: 320px; height: 320px;
+  background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%);
+  background-size: 30px 30px;
+  transform: rotate(15deg);
+}
+.principles-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.3fr;
+  gap: 56px;
+  position: relative;
+  z-index: 2;
+  align-items: start;
+}
+.principles-inner .left .eyebrow { color: var(--cyan); display: inline-block; margin-bottom: 18px; }
+.principles-inner .left h2 {
+  color: var(--white);
+  font-size: 36px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.principles-inner .left p {
+  color: rgba(255,255,255,0.72);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 340px;
+}
+.princ-list {
+  display: flex; flex-direction: column;
+  gap: 14px;
+}
+.princ-row {
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 10px;
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
+  background: rgba(255,255,255,0.02);
+}
+.princ-row .ic {
+  width: 36px; height: 36px;
+  background: rgba(24,176,230,0.14);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: var(--cyan);
+}
+.princ-row .ic svg { width: 18px; height: 18px; }
+.princ-row h4 {
+  color: var(--white);
+  font-size: 16px;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.princ-row p {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.6;
+}
+
+/* Final CTA */
+.final {
+  background: var(--white);
+  padding: 100px 0;
+  border-top: 1px solid var(--line);
+}
+.final-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+.final-inner .left .eyebrow { margin-bottom: 14px; display: inline-block; }
+.final-inner .left h2 {
+  font-size: 40px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.final-inner .left p {
+  font-size: 15.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 500px;
+  margin-bottom: 28px;
+}
+.final-inner .right {
+  background: var(--seasalt);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px 32px;
+}
+.final-inner .right h4 {
+  font-size: 16px;
+  color: var(--yale);
+  margin-bottom: 14px;
+}
+.final-inner .right ul {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.final-inner .right ul li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.final-inner .right ul li::before {
+  content: ""; width: 8px; height: 8px;
+  background: var(--cyan); transform: rotate(15deg);
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap nav">
+    <a href="../index.html" class="brand-mark" aria-label="Techtiz home"><img src="../assets/logo.svg" alt="Techtiz" class="brand-logo" /></a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="../index.html" class="nav-link">About Us</a>
+      <div class="nav-item" data-mega="services">
+        <button class="nav-link" type="button" aria-expanded="false">Services <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">We Offer</div>
+              <div class="mega-list" data-list="services">
+                <a class="mega-item active" data-key="development" href="#">Development <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ai" href="#">AI &amp; Intelligence <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="automation" href="#">Automation &amp; AI Solutions <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="transformation" href="#">Digital Transformation <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ux" href="#">UX Design / Enablement <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="services">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div>
+                <div><h4 data-feat-title>Development</h4><p data-feat-desc>Build robust, scalable digital products designed to grow with your business.</p></div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="services">
+                <a href="#">Custom Software</a><a href="#">Mobile Apps</a><a href="#">Low code / No-code Dev</a><a href="#">Vibe code Dev</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">U.S. Prime contractor?</span>
+                <a class="mega-cta" href="index.html">See U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item" data-mega="industries">
+        <button class="nav-link" type="button" aria-expanded="false">Industries <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">Industries</div>
+              <div class="mega-list" data-list="industries">
+                <a class="mega-item active" data-key="healthcare" href="#">Healthcare <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="marketing" href="#">Digital Marketing <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="realestate" href="#">Real Estate <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ecommerce" href="#">E-commerce <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="logistics" href="#">Logistics &amp; Supply Chain <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="education" href="#">Education <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="industries">
+                <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                <div><h4 data-feat-title>Healthcare</h4><p data-feat-desc>Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p></div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="industries">
+                <a href="#">AI Appointment Management</a><a href="#">AI-Powered Communication</a><a href="#">Reporting Optimization</a><a href="#">Patient Records</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">State, county, local agencies?</span>
+                <a class="mega-cta" href="index.html">U.S. Public Sector →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="case-studies.html" class="nav-link">Case Studies</a>
+      <a href="#" class="nav-link">Careers</a>
+    </nav>
+    <div class="right-cta">
+      <a href="index.html" class="us-pill" aria-current="page"><span class="sled-dot"></span> U.S. Public Sector</a>
+    </div>
+  </div>
+</header>
+
+<!-- SUB-NAV -->
+<div class="subnav">
+  <div class="wrap subnav-inner">
+    <div class="crumbs">
+      <a href="../index.html">Techtiz</a>
+      <span class="sep">/</span>
+      <a href="index.html">U.S. Public Sector</a>
+      <span class="sep">/</span>
+      <span class="here">How We Engage</span>
+    </div>
+    <div class="sub-links">
+      <a href="index.html">Hub</a>
+      <a href="index.html#two-stages">Engagement Modes</a>
+      <a href="index.html#onshore">Delivery</a>
+      <a href="how-we-engage.html" class="on">How We Engage</a>
+      <a href="capabilities.html">Capabilities</a>
+      <a href="case-studies.html">Engagement Examples</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero" data-screen-label="01 Hero">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow"><span class="gl"></span> U.S. SLED · How we engage</span>
+      <h1>How a subcontract <span class="accent">engagement begins.</span></h1>
+      <p class="body">Three steps from first email to scoped work. NDA on first substantive contact. No exceptions. No public materials are exchanged before paperwork is signed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SEQUENCE -->
+<section class="sequence" data-screen-label="02 Sequence">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">The sequence</span>
+      <h2>Three steps. Predictable timing. Same playbook every time.</h2>
+      <p>The structured-relationship sequence is itself the credibility signal. Capture managers and BD leads at U.S. primes know the rhythm; we hold to it.</p>
+    </div>
+
+    <div class="seq-list">
+      <div class="seq-step">
+        <div class="seq-left">
+          <div class="seq-num">01</div>
+          <span class="seq-when">Day 1 to 5</span>
+        </div>
+        <div class="seq-body">
+          <h3>Introduction</h3>
+          <p>Email or LinkedIn introduction from a capture manager, BD lead, or program manager at a U.S. prime. Within one business day, a Techtiz partner manager replies with a mutual NDA template and a 30-minute calendar slot. The reply is from a US-based contact, not an offshore inbox.</p>
+        </div>
+        <div class="seq-detail">
+          <span class="lbl">What's exchanged</span>
+          <ul>
+            <li>Mutual NDA template (we sign yours or send ours)</li>
+            <li>Calendar invite for the capability conversation</li>
+            <li>One-page Techtiz operating-principles summary</li>
+            <li>Nothing else until the NDA is signed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="seq-step">
+        <div class="seq-left">
+          <div class="seq-num">02</div>
+          <span class="seq-when">Week 1 to 2</span>
+        </div>
+        <div class="seq-body">
+          <h3>Capability conversation under NDA</h3>
+          <p>30 to 60 minute call once the NDA is in place. The prime describes the engagement type, the procurement vehicle, the timeline, and any sensitive context. Techtiz describes which Backbone capabilities apply, the team shape, the contracting structure, and any pre-existing engagements that touch the same technical domain.</p>
+        </div>
+        <div class="seq-detail">
+          <span class="lbl">What's discussed</span>
+          <ul>
+            <li>Engagement type (pre-award, post-award, capability)</li>
+            <li>Technical surface area and team shape</li>
+            <li>Procurement vehicle and contracting structure</li>
+            <li>Timeline, named-resume availability, references</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="seq-step">
+        <div class="seq-left">
+          <div class="seq-num">03</div>
+          <span class="seq-when">Week 2 to 4</span>
+        </div>
+        <div class="seq-body">
+          <h3>Scoped subcontract conversation</h3>
+          <p>If the engagement fits, Techtiz delivers a scoped statement of work, teaming letter draft, and named-resume options. The prime's contracts team takes it from there. Subcontract paperwork closes within 7 to 14 days for most vehicles. For active pre-award engagements, the teaming letter precedes the SOW.</p>
+        </div>
+        <div class="seq-detail">
+          <span class="lbl">What's delivered</span>
+          <ul>
+            <li>Scoped statement of work (or teaming letter for pre-award)</li>
+            <li>Named-resume options aligned to LCAT requirements</li>
+            <li>Period-of-performance IP assignment language</li>
+            <li>White-label clause for all artifacts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO NOT DO -->
+<section class="boundaries" data-screen-label="03 Boundaries">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">What we do not do</span>
+      <h2>The boundaries are the credibility.</h2>
+      <p>Every engagement begins with a structured relationship. The behaviors below are out of bounds, full stop. This isn't a sales line; it's how the practice is operated.</p>
+    </div>
+    <div class="boundary-grid">
+      <div class="b-card">
+        <div class="x">✕</div>
+        <div>
+          <h4>We do not solicit RFPs from the open market.</h4>
+          <p>No public CTA inviting unsolicited RFP submissions. No catalog of decoded RFPs published as marketing material. The structured-relationship sequence is the only entry point.</p>
+        </div>
+      </div>
+      <div class="b-card">
+        <div class="x">✕</div>
+        <div>
+          <h4>We do not analyze RFPs we have not been formally engaged on.</h4>
+          <p>Strategic analysis of evaluation criteria, statutory requirements, or scoring matrices happens against a defined engagement scope, under NDA, with a prime in the room. Never as public commentary on named, active solicitations.</p>
+        </div>
+      </div>
+      <div class="b-card">
+        <div class="x">✕</div>
+        <div>
+          <h4>We do not bid as prime.</h4>
+          <p>Subcontract-only. Direct-to-agency proposals are out of scope. The prime is always the named contractor on the procurement vehicle and the only voice to the agency.</p>
+        </div>
+      </div>
+      <div class="b-card">
+        <div class="x">✕</div>
+        <div>
+          <h4>We do not contact agencies directly.</h4>
+          <p>Every engagement routes through a U.S. prime under a master subcontract. We do not appear in agency-facing emails, calls, deliverables, or co-logo footers. If the agency asks who built it, the answer is the prime's name.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES BAND -->
+<section class="principles-band" data-screen-label="04 Operating principles">
+  <div class="wrap principles-inner">
+    <div class="left">
+      <span class="eyebrow">Locked in teaming letter</span>
+      <h2>Four non-negotiables, in writing.</h2>
+      <p>These show up in the teaming letter draft we send in Step 3. They are not negotiable; they are how the practice operates.</p>
+    </div>
+    <div class="princ-list">
+      <div class="princ-row">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10 10 0 0 1 12 20c-7 0-10-8-10-8a18.45 18.45 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-2.16 3.19"></path><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg></div>
+        <div>
+          <h4>You stay the only voice to the agency.</h4>
+          <p>Never in agency-facing emails, calls, or deliverables. No co-logos, no "powered by" footers.</p>
+        </div>
+      </div>
+      <div class="princ-row">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></div>
+        <div>
+          <h4>Your brand on every artifact.</h4>
+          <p>Code, docs, decks, runbooks, and dashboards ship under your prime brand. IP licensed to you for the period of performance.</p>
+        </div>
+      </div>
+      <div class="princ-row">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"></path><path d="M9 12 l2 2 l4 -4"></path></svg></div>
+        <div>
+          <h4>Compliance posture, kept.</h4>
+          <p>We operate inside your authorization boundary. CJIS, HIPAA, IRS Pub 1075, StateRAMP-aligned controls applied to our work.</p>
+        </div>
+      </div>
+      <div class="princ-row">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="12" cy="18" r="3"></circle><path d="M6 9 v3 a2 2 0 0 0 2 2 h8 a2 2 0 0 0 2 -2 V9 M12 14 v1"></path></svg></div>
+        <div>
+          <h4>Prime PM owns the relationship.</h4>
+          <p>Status, escalations, and change requests flow through your PM. Weekly burndowns to you, never to the agency.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" data-screen-label="05 CTA">
+  <div class="wrap final-inner">
+    <div class="left">
+      <span class="eyebrow">Start the sequence</span>
+      <h2>Step 01 is one email.</h2>
+      <p>From a capture manager, BD lead, or program manager at a U.S. prime. One business day later, a US-based partner manager replies with the NDA and a calendar slot.</p>
+      <a href="contact.html" class="cta">Start an NDA conversation <span class="arr"></span></a>
+    </div>
+    <div class="right">
+      <h4>What to include in the first email</h4>
+      <ul>
+        <li>Your prime firm name and your role</li>
+        <li>Engagement type (pre-award, post-award, capability)</li>
+        <li>Technical surface area at a high level</li>
+        <li>Timing — active engagement, within 30 days, or pipeline</li>
+        <li>Whether a procurement vehicle is in mind</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand-foot">
+        <a href="../index.html" class="brand-mark"><img src="../assets/logo-light.svg" alt="Techtiz" class="brand-logo" /></a>
+        <p>An AI-native engineering studio building adaptive systems for ambitious teams.</p>
+      </div>
+      <div>
+        <h5>U.S. Public Sector</h5>
+        <ul>
+          <li><a href="index.html">SLED Hub</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="how-we-engage.html">How We Engage</a></li>
+          <li><a href="case-studies.html">Engagement Examples</a></li>
+          <li><a href="index.html#vehicles">Procurement Vehicles</a></li>
+          <li><a href="contact.html">SLED Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>International</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="#">Solutions</a></li>
+          <li><a href="#">Industries</a></li>
+          <li><a href="#">Case Studies</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Insights</h5>
+        <ul><li><a href="#">Articles</a></li><li><a href="#">Playbooks</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="strip">
+      <div>© 2026 Techtiz · Lahore HQ · U.S. office</div>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="_nav.js"></script>
+</body>
+</html>

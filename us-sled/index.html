@@ -631,6 +631,97 @@
 }
 .see-all-link a:hover { gap: 16px; }
 
+/* ----- Specializations grid ----- */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.spec-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 26px 26px 24px;
+  display: flex; flex-direction: column;
+  gap: 14px;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.spec-card:hover {
+  transform: translateY(-2px);
+  border-color: #C2CCD9;
+  box-shadow: 0 18px 36px -18px rgba(21,58,95,0.16);
+}
+.spec-card .spec-head {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.spec-card .spec-ic {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  background: var(--cyan-soft);
+  color: var(--cyan-strong);
+  display: grid; place-items: center;
+}
+.spec-card .spec-ic svg { width: 22px; height: 22px; }
+.spec-card .spec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.spec-card h3 {
+  font-size: 18px;
+  color: var(--yale-dark);
+  line-height: 1.25;
+}
+.spec-card p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.spec-card .spec-tools {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+  margin-top: auto;
+}
+.spec-card .spec-tools span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cyan-strong);
+  background: var(--seasalt);
+  border: 1px solid var(--line);
+  padding: 4px 9px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.spec-card-cta {
+  background: var(--yale-dark);
+  border-color: var(--yale-dark);
+  color: var(--white);
+}
+.spec-card-cta:hover { border-color: var(--yale-dark); }
+.spec-card-cta .spec-ic-alt {
+  background: rgba(24,176,230,0.18);
+  color: var(--cyan);
+}
+.spec-card-cta .spec-num { color: rgba(255,255,255,0.5); }
+.spec-card-cta h3 { color: var(--white); }
+.spec-card-cta p { color: rgba(255,255,255,0.75); }
+.spec-card-cta .spec-link {
+  margin-top: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: inline-flex; align-items: center; gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  transition: gap 200ms ease;
+}
+.spec-card-cta .spec-link:hover { gap: 16px; }
+
 /* ----- Easy to put on contract (procurement vehicles) ----- */
 .vehicles {
   background: var(--seasalt);
@@ -1041,11 +1132,11 @@
     </div>
     <div class="sub-links" data-spy>
       <a href="#top" data-spy-id="top" class="on">Hub</a>
-      <a href="#two-stages" data-spy-id="two-stages">For Primes</a>
+      <a href="#two-stages" data-spy-id="two-stages">Engagement Modes</a>
       <a href="#onshore" data-spy-id="onshore">Delivery</a>
-      <a href="#vehicles" data-spy-id="vehicles">Vehicles</a>
+      <a href="how-we-engage.html">How We Engage</a>
       <a href="capabilities.html">Capabilities</a>
-      <a href="case-studies.html">Case Studies</a>
+      <a href="#vehicles" data-spy-id="vehicles">Vehicles</a>
       <a href="contact.html">Contact</a>
     </div>
   </div>
@@ -1070,12 +1161,12 @@
   <div class="wrap inner">
     <div class="lead">
       <span class="eyebrow"><span class="gl"></span> U.S. SLED · Back-office engineering for primes</span>
-      <h1>Decode the RFP. <span class="accent">Build the backbone.</span><br/>Quietly behind your brand.</h1>
-      <p class="body">Back-office engineering for U.S. primes. RFP decode and technical delivery, white-labeled. We never face the agency.</p>
+      <h1>Back-office technical engineering for <span class="accent">U.S. SLED prime contractors.</span></h1>
+      <p class="body">Specialized subcontractor support for GIS, AI, automation, statutory document production, grant reporting, and platform modernization. NDA-first. Subcontract-only. We never face the agency.</p>
 
       <div class="cta-row">
-        <a href="#inquiry" class="cta">Send us an RFP to decode <span class="arr"></span></a>
-        <a href="case-studies.html" class="btn-ghost-dark">See the decodes →</a>
+        <a href="contact.html" class="cta">Start an NDA conversation <span class="arr"></span></a>
+        <a href="how-we-engage.html" class="btn-ghost-dark">How we engage →</a>
       </div>
 
       <div class="quick-stats">
@@ -1088,8 +1179,8 @@
           <div class="l">Response SLA, NDA-bound</div>
         </div>
         <div class="qs">
-          <div class="n">21</div>
-          <div class="l">RFPs decoded · 5 families</div>
+          <div class="n">NDA</div>
+          <div class="l">First on substantive contact</div>
         </div>
         <div class="qs">
           <div class="n">0</div>
@@ -1099,7 +1190,7 @@
 
       <div class="disclaimer" style="margin-top: 28px;">
         <span class="tsq"></span>
-        Back-office only · We never face the agency · We do not compete with our partners
+        Subcontract-only · NDA-first intake · We never face the agency · We do not compete with our partners
       </div>
     </div>
   </div>
@@ -1133,8 +1224,8 @@
       <div class="trust-item">
         <div class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7 v5 l3 2"></path></svg></div>
         <div class="ti-body">
-          <span class="ti-l">Decode SLA</span>
-          <span class="ti-v">5 business days</span>
+          <span class="ti-l">Response SLA</span>
+          <span class="ti-v">1 business day</span>
         </div>
       </div>
     </div>
@@ -1144,16 +1235,16 @@
 <!-- TWO STAGES · ONE PARTNER -->
 <section class="block two-stages" id="two-stages" data-screen-label="02 Two stages">
   <div class="wrap">
-    <span class="eyebrow" style="margin-bottom: 14px; display: inline-flex; align-items: center;"><span class="gl"></span> TWO PHASES. ONE PARTNER.</span>
+    <span class="eyebrow" style="margin-bottom: 14px; display: inline-flex; align-items: center;"><span class="gl"></span> Two engagement modes. One contract structure.</span>
     <div class="ts-header">
       <h2>Engage us pre-award, post-award, or both, the prime always stays the face to the agency.</h2>
-      <p class="sub">Primes plug us in pre-award to decode the RFP, post-award to deliver, or both. We work behind your brand, on your tools, under your PM.</p>
+      <p class="sub">Under teaming letter and NDA. Pre-award, we draft proposal volumes and build demo systems for your evaluation panel. Post-award, we deliver the technical workstream. Either way, white-labeled.</p>
     </div>
 
     <div class="toggle-pill" role="tablist">
       <button class="on" data-stage="pre" role="tab" aria-selected="true">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L8 6 H4 v4 L0 14 l4 4 v4 h4 l4 4 4 -4 h4 v-4 l4 -4 -4 -4 V6 h-4 z" transform="scale(0.6) translate(8 8)"></path><path d="M9 9 l6 6 M15 9 l-6 6"></path></svg>
-        Pre-Award Support
+        Pre-Award Proposal Support
       </button>
       <button data-stage="post" role="tab" aria-selected="false">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg>
@@ -1164,14 +1255,14 @@
     <!-- PRE-BID PANEL -->
     <div class="stage-panel show" data-panel="pre">
       <div class="stage-side">
-        <div class="stage-tag">Phase 01 · Pre-Award</div>
-        <h3>Decode the RFP and load the technical volume.</h3>
+        <div class="stage-tag">Phase 01 · Pre-Award (under teaming letter + NDA)</div>
+        <h3>Load the technical volume. Build the demo. Package past performance.</h3>
 
         <div class="pain-card">
           <div class="pain-label">The Pain Point</div>
           <p>"17 days to submission. Your architect is on another pursuit. Technical volume, compliance matrix, and orals demo all need owners."</p>
         </div>
-        <div class="role-line">↳ Our role: <strong>Back-office decode &amp; technical-volume support</strong></div>
+        <div class="role-line">↳ Our role: <strong>Proposal-support services under teaming letter</strong></div>
       </div>
 
       <div class="svc-grid">
@@ -1187,8 +1278,8 @@
           <span class="nu">02</span>
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
           <div class="body">
-            <h4>Compliance matrix prep</h4>
-            <p>Line-by-line traceability against the SOW, every requirement mapped to a proposal section, owner, and evidence.</p>
+            <h4>Compliance matrix preparation</h4>
+            <p>Line-by-line traceability against the SOW, every statutory requirement mapped to a proposal section, owner, and evidence.</p>
           </div>
         </div>
         <div class="svc-card">
@@ -1420,16 +1511,12 @@
     </div>
     <div class="stats">
       <div class="stat">
-        <div class="n">5 <span class="small">days</span></div>
-        <div class="l">RFP decode turnaround</div>
-      </div>
-      <div class="stat">
         <div class="n">100<span class="small">%</span></div>
-        <div class="l">GIS-tagged facility inventory · Bay County MMP</div>
+        <div class="l">GIS-tagged facility inventory delivered on a state environmental plan</div>
       </div>
       <div class="stat">
         <div class="n">0</div>
-        <div class="l">EGLE format deficiencies on first submission</div>
+        <div class="l">Statutory-format deficiencies on first submission</div>
       </div>
       <div class="stat">
         <div class="n">35<span class="small">/35</span></div>
@@ -1438,6 +1525,10 @@
       <div class="stat">
         <div class="n">0</div>
         <div class="l">Late quarterly grant reports filed</div>
+      </div>
+      <div class="stat">
+        <div class="n">0</div>
+        <div class="l">Agency-facing engagements ever</div>
       </div>
     </div>
   </div>
@@ -1459,10 +1550,10 @@
       <a class="cap-card backbone-card" href="capabilities.html">
         <div class="icon-badge">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V8 z"></path><path d="M14 2 v6 h6"></path><path d="M9 13 h6 M9 17 h4"></path></svg></div>
-          <span class="badge-no">01 · Decode</span>
+          <span class="badge-no">01 · Specify</span>
         </div>
-        <h3>RFP Decode Engine</h3>
-        <p>Strategic analysis of evaluation criteria, statutory traps, and timeline realities. Five-day turnaround.</p>
+        <h3>Technical Requirements Analysis</h3>
+        <p>Translating SOW technical sections into architecture, integration, and delivery specifications. Under NDA, against a defined engagement scope.</p>
       </a>
       <a class="cap-card backbone-card" href="capabilities.html">
         <div class="icon-badge">
@@ -1508,52 +1599,78 @@
   </div>
 </section>
 
-<!-- RECENT RFPS -->
-<section class="block" style="background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);" data-screen-label="07 Recent RFPs">
+<!-- SPECIALIZATIONS -->
+<section class="block" style="background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);" data-screen-label="07 Specializations">
   <div class="wrap">
     <div class="block-head">
       <div class="left">
-        <span class="eyebrow">Recent RFPs we've decoded</span>
-        <h2>The evidence is the analysis.</h2>
-        <p class="sub">Six decodes published across four RFP families. Each one a permanent capability artifact.</p>
+        <span class="eyebrow">Specializations we go deep on</span>
+        <h2>The technical domains we engineer in.</h2>
+        <p class="sub">Five surface areas where we keep specialized engineers, tooling, and statutory-format expertise on hand. Plug-in ready under a prime's master subcontract.</p>
       </div>
-      <div class="right"><a href="case-studies.html">All case studies →</a></div>
+      <div class="right"><a href="case-studies.html">Delivered engagement examples →</a></div>
     </div>
 
-    <div class="rfp-grid">
-      <a class="rfp-card" href="case-study-2026-08.html">
-        <span class="status decoded">Decoded</span>
-        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"></path></svg></div>
-        <div class="rfp-num">RFP 2026-08</div>
-        <div class="rfp-title">Professional Consulting Services for Bay County Materials Management Plan</div>
-        <div class="rfp-meta"><span>Michigan</span><span>MMP</span><span>$390K to $620K</span></div>
-        <div class="rfp-hook">"Why fee-priced bids systematically lose this RFP."</div>
-        <span class="rfp-link">Read the decode</span>
-      </a>
+    <div class="spec-grid">
+      <article class="spec-card">
+        <div class="spec-head">
+          <div class="spec-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10 c0 7 -9 13 -9 13 s-9 -6 -9 -13 a9 9 0 0 1 18 0 z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+          <span class="spec-num">01</span>
+        </div>
+        <h3>Materials &amp; environmental data platforms</h3>
+        <p>Facility inventories, capacity forecast models, multi-source spatial joins, and statutory-format document production for environmental plans adopted under state framework guidance.</p>
+        <div class="spec-tools"><span>ArcGIS</span><span>PostGIS</span><span>GeoPandas</span><span>EGLE-format tooling</span></div>
+      </article>
 
-      <a class="rfp-card" href="case-studies.html">
-        <span class="status decoded">Decoded</span>
-        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21 h18"></path><path d="M6 21 V8 l6 -4 l6 4 v13"></path></svg></div>
-        <div class="rfp-num">RFP 2025-31</div>
-        <div class="rfp-title">Statewide Digital Service Modernization &amp; WCAG 2.2 AA Conformance</div>
-        <div class="rfp-meta"><span>Oregon</span><span>WCAG</span><span>$1.2M to $1.8M</span></div>
-        <div class="rfp-hook">"Six accessibility traps that disqualify late-stage bids."</div>
-        <span class="rfp-link">Read the decode</span>
-      </a>
+      <article class="spec-card">
+        <div class="spec-head">
+          <div class="spec-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12 h20 M12 2 a15 15 0 0 1 0 20"></path></svg></div>
+          <span class="spec-num">02</span>
+        </div>
+        <h3>Accessibility remediation engineering</h3>
+        <p>WCAG 2.2 AA component-library refactors, PDF/UA conversion pipelines, screen-reader regression suites, plain-language editing of statutory content at portal scale.</p>
+        <div class="spec-tools"><span>axe DevTools</span><span>NVDA / VoiceOver</span><span>PDF/UA</span><span>Pandoc</span></div>
+      </article>
 
-      <a class="rfp-card" href="case-studies.html">
-        <span class="status decoded">Decoded</span>
-        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M3 12 h18 M12 3 a14 14 0 0 1 0 18"></path></svg></div>
-        <div class="rfp-num">RFP 2026-12</div>
-        <div class="rfp-title">Statewide Permitting Platform Modernization · Phase 2</div>
-        <div class="rfp-meta"><span>Colorado</span><span>Permitting</span><span>$2.4M to $3.1M</span></div>
-        <div class="rfp-hook">"How a 12-week pilot beats a 9-month RFP build-out."</div>
-        <span class="rfp-link">Read the analysis</span>
-      </a>
-    </div>
+      <article class="spec-card">
+        <div class="spec-head">
+          <div class="spec-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M16 2 v4 M8 2 v4 M3 10 h18"></path><path d="M8 14 h2 M14 14 h2 M8 17 h2 M14 17 h2"></path></svg></div>
+          <span class="spec-num">03</span>
+        </div>
+        <h3>Permitting &amp; licensing system modernization</h3>
+        <p>Service-layer wrappers over legacy mainframes, ETL pipelines for record migration, reconciliation reporting, IV&amp;V response packages, audit-trail and FOIA export tooling.</p>
+        <div class="spec-tools"><span>Airbyte</span><span>dbt</span><span>PostgreSQL</span><span>Supabase</span></div>
+      </article>
 
-    <div class="see-all-link">
-      <a href="case-studies.html">See all 6 decoded RFPs and our delivered engagements →</a>
+      <article class="spec-card">
+        <div class="spec-head">
+          <div class="spec-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21 v-2 a4 4 0 0 0 -4 -4 H5 a4 4 0 0 0 -4 4 v2\"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21 v-2 a4 4 0 0 0 -3 -3.87"></path><path d="M16 3.13 a4 4 0 0 1 0 7.75"></path></svg></div>
+          <span class="spec-num">04</span>
+        </div>
+        <h3>Public engagement platform engineering</h3>
+        <p>Multilingual survey platforms, comment-capture and triage workflows, hearing-pack generators, disadvantaged-community outreach instrumentation, equity dashboards.</p>
+        <div class="spec-tools"><span>i18next</span><span>Twilio</span><span>SendGrid</span><span>Custom survey</span></div>
+      </article>
+
+      <article class="spec-card">
+        <div class="spec-head">
+          <div class="spec-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+          <span class="spec-num">05</span>
+        </div>
+        <h3>Grant reporting automation</h3>
+        <p>Quarterly milestone reporting pipelines, federal-state reconciliation engines, deadline alerting, audit-trail artifacts, format generators for pass-through programs.</p>
+        <div class="spec-tools"><span>n8n</span><span>Make.com</span><span>Workday Adaptive</span><span>Metabase</span></div>
+      </article>
+
+      <article class="spec-card spec-card-cta">
+        <div class="spec-head">
+          <div class="spec-ic spec-ic-alt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 h18 M14 5 l7 7 -7 7"></path></svg></div>
+          <span class="spec-num">+</span>
+        </div>
+        <h3>A specialization not listed?</h3>
+        <p>If your pursuit sits adjacent to one of these surface areas, the capability is likely covered. Start with a 30-minute NDA-first conversation; we'll map our team shape to your SOW.</p>
+        <a class="spec-link" href="contact.html">Start an NDA conversation <span>→</span></a>
+      </article>
     </div>
   </div>
 </section>
@@ -1635,10 +1752,10 @@
 
     <div class="why-grid">
       <div class="why-card">
-        <div class="num">01 · Pattern recognition</div>
-        <h3>We've read the RFPs in your pipeline.</h3>
-        <p>Not one RFP in one family. We've decoded 21 across five families. The patterns evaluation committees weight become legible only across the category.</p>
-        <div class="counter"><em>Counter to</em> "do you understand U.S. SLED?"</div>
+        <div class="num">01 · Specialization depth</div>
+        <h3>We've engineered the deliverables your SOW will name.</h3>
+        <p>Real production work across GIS, AI, workflow automation, statutory document production, and grant reporting, ready to plug into your bid stack under teaming letter.</p>
+        <div class="counter"><em>Counter to</em> "do you understand U.S. SLED technical scope?"</div>
       </div>
 
       <div class="why-card">
@@ -1664,8 +1781,8 @@
     <div class="inquiry-shell">
       <aside class="inquiry-left">
         <span class="eyebrow">Partner with us</span>
-        <h2>Decode it. Deliver it. Quietly.</h2>
-        <p>21 days from submission or 21 days from kickoff, tell us where you need back-office engineering. A US partner manager replies within one business day with draft scope and teaming letter.</p>
+        <h2>NDA first. Subcontract second. White-label always.</h2>
+        <p>Capture managers, BD leads, and program managers at U.S. primes: a US partner manager replies within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials exchanged before the NDA is signed.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12 l2.5 2.5 L16 9"></path></svg> One business day response</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12 l2.5 2.5 L16 9"></path></svg> Mutual NDA on first contact</li>
@@ -1681,8 +1798,8 @@
             <div class="need-card on" data-need="pre">
               <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
               <div class="body">
-                <h5>Pre-Award Support</h5>
-                <p>Decode, writing, demos</p>
+                <h5>Pre-Award Proposal Support</h5>
+                <p>Under NDA + teaming letter</p>
               </div>
               <div class="check"></div>
             </div>
@@ -1775,9 +1892,9 @@
         <ul>
           <li><a href="index.html">SLED Hub</a></li>
           <li><a href="capabilities.html">Capabilities</a></li>
-          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="how-we-engage.html">How We Engage</a></li>
+          <li><a href="case-studies.html">Engagement Examples</a></li>
           <li><a href="#vehicles">Procurement Vehicles</a></li>
-          <li><a href="#two-stages">For Primes</a></li>
           <li><a href="contact.html">SLED Contact</a></li>
         </ul>
       </div>
@@ -1807,7 +1924,7 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#">Careers</a></li>
-          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="case-studies.html">Engagement Examples</a></li>
           <li><a href="#">Press</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
