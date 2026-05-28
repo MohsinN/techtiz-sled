@@ -19,7 +19,7 @@
   --amber: #D89017;
 
   /* Status badges */
-  --status-decoded: var(--cyan);
+  --status-active: var(--cyan);
   --status-bidding: var(--amber);
   --status-awarded: var(--yale);
   --status-delivered: var(--green);
@@ -492,7 +492,7 @@ section.block.tight { padding: 80px 0; }
   content: ""; width: 7px; height: 7px;
   background: currentColor; transform: rotate(15deg);
 }
-.status.decoded { color: var(--cyan-strong); background: rgba(24,176,230,0.10); }
+.status.active { color: var(--cyan-strong); background: rgba(24,176,230,0.10); }
 .status.bidding { color: #9A6610; background: rgba(216,144,23,0.12); }
 .status.awarded { color: var(--white); background: var(--yale); }
 .status.delivered { color: #1F7855; background: rgba(43,165,114,0.14); }
@@ -691,13 +691,18 @@ section[id], div[id] { scroll-margin-top: 140px; }
   font-size: 11.5px;
   letter-spacing: 0.04em;
   color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-right: 24px;
 }
 .subnav-inner .crumbs a { color: var(--muted); transition: color 180ms ease; }
 .subnav-inner .crumbs a:hover { color: var(--yale); }
 .subnav-inner .crumbs .sep { color: var(--line); }
 .subnav-inner .crumbs .here { color: var(--yale); font-weight: 600; }
 .subnav-inner .sub-links {
-  display: flex; gap: 24px;
+  display: flex; gap: 22px;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
 }
 .subnav-inner .sub-links a {
   font-size: 13.5px;
@@ -706,6 +711,7 @@ section[id], div[id] { scroll-margin-top: 140px; }
   padding: 6px 0;
   border-bottom: 2px solid transparent;
   transition: color 180ms ease, border-color 180ms ease;
+  white-space: nowrap;
 }
 .subnav-inner .sub-links a:hover { color: var(--yale); }
 .subnav-inner .sub-links a.on { color: var(--yale); border-bottom-color: var(--cyan); font-weight: 600; }
